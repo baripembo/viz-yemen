@@ -74,6 +74,11 @@ footer {
 	width: 100%;
 }
 
+#trigger1 {
+	margin-top: 50px;
+   min-height: 1px;
+}
+
 .logos {
 	// display: flex;
 	// flex-flow: row;
@@ -130,9 +135,14 @@ footer {
   align-items: center;
   flex-direction: column;
   text-align: left;
-  > div {
-		width: 800px;
+  .container {
+  	background-color: #FFF;
+		width: 100%;
   	z-index: 1;
+  }
+  .inner {
+  	margin: 0 auto;
+  	width: 800px;
   }
 }
 

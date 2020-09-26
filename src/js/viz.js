@@ -44,22 +44,36 @@ $( document ).ready(function() {
       console.log('Map loaded')
     });
 
-    // $(window).scroll(function() {
-    //   var top_of_element = $(".article").offset().top;
-    //   var bottom_of_element = $(".article").offset().top + $(".article").outerHeight();
-    //   var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
-    //   var top_of_screen = $(window).scrollTop();
-
-    //   if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
-    //     console.log('article starts')
-    //     $('.feature').css('position','absolute')
-    //       // the element is visible, do something
-    //   } else {
-    //     $('.feature').css('position','fixed')
-    //     console.log('nope')
-    //       // the element is not visible, do something else
+        // init
+    // var controller = new ScrollMagic.Controller({
+    //   globalSceneOptions: {
+    //     triggerHook: 'onLeave',
+    //     duration: '0' // this works just fine with duration 0 as well
+    //     // However with large numbers (>20) of pinned sections display errors can occur so every section should be unpinned once it's covered by the next section.
+    //     // Normally 100% would work for this, but here 200% is used, as Panel 3 is shown for more than 100% of scrollheight due to the pause.
     //   }
     // });
+
+    // // get all slides
+    // var slides = document.querySelectorAll("section.panel");
+
+    // // create scene for every slide
+    // for (var i=0; i<slides.length; i++) {
+    //   new ScrollMagic.Scene({
+    //       triggerElement: slides[i]
+    //     })
+    //     .setPin(slides[i], {pushFollowers: false})
+    //     .addIndicators() // add indicators (requires plugin)
+    //     .addTo(controller);
+    // }
+
+    // init controller
+    var controller = new ScrollMagic.Controller();
+
+    var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 300})
+        .setPin("#feature", {pushFollowers: false})
+        .addIndicators({name: "1 (duration: 300)"}) // add indicators (requires plugin)
+        .addTo(controller);
   }
 
   function initTracking() {

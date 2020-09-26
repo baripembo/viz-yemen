@@ -8,15 +8,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
     <link href='css/styles.css' rel='stylesheet' />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.1/ScrollTrigger.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <style type="text/css">
+      #trigger1 {
+        margin-top: 50px;
+        min-height: 1px;
+      }
+
+      .panel {
+        height: 100%;
+        width: 100%;
+      }
+      .panel.green {
+        background-color: green;
+      }
+      .panel.red {
+        background-color: red;
+      }
+      .panel.blue {
+        background-color: blue;
+      }
+      .panel.yellow {
+        background-color: yellow;
+      }
+      .panel.orange {
+        background-color: orange;
+      }
+    </style>
   </head>
 
   <body>
 
     <main>
-      <div class='feature'>
+<!--       <div class='feature'>
         <div class='logos'>
           <a href='https://www.unocha.org' target='_blank'>
             <img height='35' src='assets/logo-ocha-white.png'>
@@ -32,10 +58,30 @@
         <div class='arrow-down bounce'>
           <i class='humanitarianicons-Down'></i>
         </div>
-      </div>
+      </div> -->
 
-      <section id='section1' class='fill-viewport'>
-        <div class='header'>
+      <div id="trigger1" class="spacer s0"></div>
+
+      <section id='feature' class='panel'>
+        <div class='logos'>
+          <a href='https://www.unocha.org' target='_blank'>
+            <img height='35' src='assets/logo-ocha-white.png'>
+          </a>
+          <a href='https://centre.humdata.org' target='_blank'>
+            <img height='38' src='assets/logo-centre-white.png'>
+          </a>
+        </div>
+
+        <div id='map'></div>
+        <div class='bg-gradient'></div>
+
+        <div class='arrow-down bounce'>
+          <i class='humanitarianicons-Down'></i>
+        </div>
+      </section>
+
+      <section id='section1' class='panel blue'>
+        <!-- <div class='header'>
           <h1>Displaced in Yemen</h1>
           <h2>A Journey of 462 kilometers in search of safety</h2>
           <div class='social-icons'>
@@ -43,14 +89,14 @@
             <a href='#'><i class='humanitarianicons-Multi-cluster-sector'></i></a>
           </div>
           <h5>July 2020</h5>
-        </div>
+        </div> -->
         <div class='header-body'>
           <p>More than five years of conflict have left 80 percent of Yemen’s population (over 24 million people) dependent on humanitarian assistance and protection. Continued funding shortages and travel restrictions due to the coronavirus are putting aid operations at risk.</p>
           <p>Follow Ali and his family as they travel from Al Hudaydah to Aden, in search of safety.</p>
         </div>
       </section>
 
-      <section id='section2' class='fill-viewport'>
+      <section id='section2' class='panel green'>
         <div>
           <h3>Fighting in Al Hudaydah City</h3>
           <p>In November 2017, fighting reached the neighbourhood in the Al Hali District in Al Hudaydah, where Ali lived with his wife, Fariha, and three children. Several residents were killed and others were severely injured by stray bullets and indiscriminate shelling. Soon, the area became deserted as people fled the fighting. Ali and his family decided to leave too.</p>
@@ -58,7 +104,7 @@
         </div>
       </section>
 
-      <section id='section3' class='fill-viewport'>
+      <section id='section3' class='panel red'>
         <div>
           <h3>Bayt Al Faqih [stay: 4-5 days]</h3>
           <p>In Bayt Al Faqih, the family knew no one and slept outside next to a mosque for three days. As the fighting drew closer again, Ali and Fariha decided to head for Aden, but armed men at a checkpoint refused to let them pass. As they couldn’t follow the main road to Aden, they decided to go through Taizz City.</p>
@@ -67,7 +113,7 @@
         </div>
       </section>
 
-      <section id='section4' class='fill-viewport'>
+      <section id='section4' class='panel yello'>
         <div>
           <h3>Taizz City [stay: one week]</h3>
           <p>Ali and Fariha had never been this far away from home. They were exhausted and did not know where to go. They lived on food donated by residents in the area. While in Taizz City, Ali learned from former neighbours that his house in Al Hudaydah had been looted and all the family’s belongings stolen. He thought about how he had lost everything except his family in less than two weeks.</p>
@@ -75,7 +121,7 @@
         </div>
       </section>
 
-      <section id='section5' class='fill-viewport'>
+      <section id='section5' class='panel orange'>
         <div>
           <h3>Arrival in Aden (ongoing) </h3>
           <p>When the family finally reached the school in Dar Sad District where the displacement site was located, they found that all classrooms were occupied. They had no choice but to sleep in the schoolyard. As of June 2020, Aden Governorate hosts 26 IDP sites (nine of which are located in Dar Sad District) with over 11,000 internally displaced people, in addition to numerous other IDP families who live with host families or rent their own accommodation.</p>
@@ -83,7 +129,7 @@
         </div>
       </section>
 
-      <section id='section6' class='article'>
+      <section id='section6' class='panel gray'>
         <div class='container'>
           <div class='inner'>
             <h3>Displacement</h3>
