@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Displaced in Yemen</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel='icon' type='image/png' href='https://data.humdata.org/images/icons/hdx.ico' />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+    <link href='css/styles.css' rel='stylesheet' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <style type="text/css">
+      #trigger1 {
+        margin-top: 50px;
+        min-height: 1px;
+      }
+
+      .panel {
+        height: 100%;
+        width: 100%;
+      }
+      .panel.green {
+        background-color: green;
+      }
+      .panel.red {
+        background-color: red;
+      }
+      .panel.blue {
+        background-color: blue;
+      }
+      .panel.yellow {
+        background-color: yellow;
+      }
+      .panel.orange {
+        background-color: orange;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <main>
+<!--       <div class='feature'>
+        <div class='logos'>
+          <a href='https://www.unocha.org' target='_blank'>
+            <img height='35' src='assets/logo-ocha-white.png'>
+          </a>
+          <a href='https://centre.humdata.org' target='_blank'>
+            <img height='38' src='assets/logo-centre-white.png'>
+          </a>
+        </div>
+
+        <div id='map'></div>
+        <div class='bg-gradient'></div>
+
+        <div class='arrow-down bounce'>
+          <i class='humanitarianicons-Down'></i>
+        </div>
+      </div> -->
+
+      <div id="trigger1" class="spacer s0"></div>
+
+      <section id='feature' class='panel'>
+        <div class='logos'>
+          <a href='https://www.unocha.org' target='_blank'>
+            <img height='35' src='assets/logo-ocha-white.png'>
+          </a>
+          <a href='https://centre.humdata.org' target='_blank'>
+            <img height='38' src='assets/logo-centre-white.png'>
+          </a>
+        </div>
+
+        <div id='map'></div>
+        <div class='bg-gradient'></div>
+
+        <div class='arrow-down bounce'>
+          <i class='humanitarianicons-Down'></i>
+        </div>
+      </section>
+
+      <section id='section1' class='panel blue'>
+        <!-- <div class='header'>
+          <h1>Displaced in Yemen</h1>
+          <h2>A Journey of 462 kilometers in search of safety</h2>
+          <div class='social-icons'>
+            <a href='#'><i class='humanitarianicons-Favourite'></i></a>
+            <a href='#'><i class='humanitarianicons-Multi-cluster-sector'></i></a>
+          </div>
+          <h5>July 2020</h5>
+        </div> -->
+        <div class='header-body'>
+          <p>More than five years of conflict have left 80 percent of Yemen’s population (over 24 million people) dependent on humanitarian assistance and protection. Continued funding shortages and travel restrictions due to the coronavirus are putting aid operations at risk.</p>
+          <p>Follow Ali and his family as they travel from Al Hudaydah to Aden, in search of safety.</p>
+        </div>
+      </section>
+
+      <section id='section2' class='panel green'>
+        <div>
+          <h3>Fighting in Al Hudaydah City</h3>
+          <p>In November 2017, fighting reached the neighbourhood in the Al Hali District in Al Hudaydah, where Ali lived with his wife, Fariha, and three children. Several residents were killed and others were severely injured by stray bullets and indiscriminate shelling. Soon, the area became deserted as people fled the fighting. Ali and his family decided to leave too.</p>
+          <p>They fled using a neighbour’s donkey cart, leaving most of their belongings behind, and went to a nearby neighbourhood and stayed with relatives. Three days later, as shelling drew closer, the family left Al Hudaydah for Bayt Al Faqih, where Ali’s father had once lived.</p>
+        </div>
+      </section>
+
+      <section id='section3' class='panel red'>
+        <div>
+          <h3>Bayt Al Faqih [stay: 4-5 days]</h3>
+          <p>In Bayt Al Faqih, the family knew no one and slept outside next to a mosque for three days. As the fighting drew closer again, Ali and Fariha decided to head for Aden, but armed men at a checkpoint refused to let them pass. As they couldn’t follow the main road to Aden, they decided to go through Taizz City.</p>
+          <p>((Images followed by quote)) “We didn’t have any relatives here, no place to stay, nothing to eat. The baker gave us bread and water, but we had nothing.”</p>
+          <p>The family lived on water and bread donated by a local bakery. Ali borrowed 8,000 Yemeni rials (around US$20) to pay a bus driver to take them to Taizz City, driving through rugged terrain to avoid detection. Gunmen at checkpoints on the outskirts of Taizz City only allowed them to pass when they said they were visiting relatives.</p>
+        </div>
+      </section>
+
+      <section id='section4' class='panel yello'>
+        <div>
+          <h3>Taizz City [stay: one week]</h3>
+          <p>Ali and Fariha had never been this far away from home. They were exhausted and did not know where to go. They lived on food donated by residents in the area. While in Taizz City, Ali learned from former neighbours that his house in Al Hudaydah had been looted and all the family’s belongings stolen. He thought about how he had lost everything except his family in less than two weeks.</p>
+          <p>A few days later, people advised Ali to take his family to a displacement site in a school in Dar Sad in Aden Governorate, where they could get help from aid agencies. Other displaced families, who had managed to pool enough money to pay a bus driver to take them to Aden, agreed to let the family travel with them on the 130 kilometer long ride.</p>
+        </div>
+      </section>
+
+      <section id='section5' class='panel orange'>
+        <div>
+          <h3>Arrival in Aden (ongoing) </h3>
+          <p>When the family finally reached the school in Dar Sad District where the displacement site was located, they found that all classrooms were occupied. They had no choice but to sleep in the schoolyard. As of June 2020, Aden Governorate hosts 26 IDP sites (nine of which are located in Dar Sad District) with over 11,000 internally displaced people, in addition to numerous other IDP families who live with host families or rent their own accommodation.</p>
+          <p>Aid agencies erected a tent for the family and provided them with food rations and cash assistance. Ali and his family had access to clean water from tanks installed at the site. Ali occasionally earned a little money from working as a labourer but the family depended on assistance provided by aid organizations.</p>
+        </div>
+      </section>
+
+      <section id='section6' class='panel gray'>
+        <div class='container'>
+          <div class='inner'>
+            <h3>Displacement</h3>
+
+            <p>Since the conflict began in March 2015, about 4.3 million people have been displaced. It is estimated that 3.6 million people – more than one in every ten Yemenis – remain displaced today. They are living with host families or in informal sites, such as abandoned buildings, empty schools, camps or out in the open.</p>
+
+            <p>((dot square visualization with figures or annotations: total population, people in need)) Four in five persons are in need of some form of humanitarian assistance or protection</p>
+
+            <p>((annotation 1 sliding in over the chart)) Yemen’s population is estimated at 30.5 million people.</p>
+            
+            <p>((annotation 2 sliding in over the chart)) 24.1 million Yemenis – or 80 percent of the total population – are in need of humanitarian aid.</p>
+            
+            <p>((the dot chart disappears while the line chart appears)) The number of people displaced increased sharply since the conflict broke out in 2015</p>
+            
+            <p>((annotation sliding in over the chart)) More than 1 in every 10 Yemenis remain displaced today.</p>
+
+
+            <h3>Food</h3>
+            <p>Nearly half of all Yemenis don’t know when they will eat next</p>
+
+            <p>((map of food insecurity 2018 – 2020))</p>
+
+            <p>((annotation 1, sliding onto the map)) 2018 was marked by severe food insecurity, but the situation improved in 2019 as a result of scaled-up humanitarian response.</p>
+
+            <p>((annotation 2, sliding onto the map)) Due to a lack of funding and as a result of the COVID-19 pandemic, food insecurity is again on the rise in 2020.</p>
+
+            <p>Economists expect a major contraction of the economy in coming months</p>
+
+            <p>((line chart of commodity price trend)) Overall commodity price trend since the outbreak of the conflict</p>
+
+            <p>((annotation sliding in over map)) Poverty rates have dramatically increased, with an estimated 81 percent of Yemenis now below the poverty line.</p>
+
+            <h3>Health</h3>
+
+            <p>Only half of health facilities are functioning, one-third of school-aged children are out of school</p>
+
+            <p>((split map of health facilities infrastructure 2015 vs 2020: static maps with points/icons and a year indication, scrolling trigger to switch from one to the other year)) Yemen’s health facilities have been significantly impacted by the conflict</p>
+
+            <h3>Section 5: The arrival of COVID-19 in Yemen</h3>
+
+            <h4>((Section heading)) COVID-19 is worsening an already grave situation</h4>
+
+            <p>The family’s life became more challenging  once COVID-19 reached Yemen in March 2020. Guarding against infection in the close quarters of the camp is almost impossible. Even finding soap and water to wash their hands can be difficult.</p>
+
+            <p>Restrictions on movement have meant far fewer visits by aid agencies and the mobile health clinic run by an international NGO has stopped operating. The severe humanitarian funding shortfall has resulted in a drop in food and cash assistance. Testing capacity for COVID-19 is in short supply throughout the country.  Aid agencies have for months been operating on the assumption that there is full-blown community transmission of COVID-19 in Yemen. Based on existing models, even with mitigation measures, an estimated 16.7 million people - 55 per cent of the population - may be infected with COVID-19 in Yemen. More than 42,000 people may die and up to 292,000 patients are likely to require hospitalization.</p>
+
+            <p>((graph)) COVID-19 projections</p>
+
+            <p>((Quote)) “I have seen posters imploring us to “Stay Home. Stay Safe.” But I don’t have a choice: every day I have to head out to earn enough money to feed my family.”</p>
+
+            <h3>Section 6: Conclusion</h3>
+
+            <h4>((Section heading)) We need to act, now.</h4>
+
+            <p>((Call to action to fill the funding shortages)) The scale of needs in Yemen is staggering, and the COVID-19 pandemic is worsening the humanitarian situation. But Yemen is also the world’s largest humanitarian operation, counting as of December 2019 with more than 128200 aid organizations working together to assist over 13 million people across the country every month.</p>
+
+            <p>Since the war broke out, humanitarian programmes have been making an enormous difference to bring Yemen back from the brink of famine and a resurgent cholera epidemic, as well as to help the millions of people in displacement. However, since mid-April 2020 31 of 41 critical UN programmes have been reduced or closed down due to the significant funding shortages, and as of May 2020 only 96 organizations remain active in the country threaten more than 30 out of 41 major UN supported programmes to close.</p>
+
+            <p>Urgent action is needed to continue delivering principled aid at scale and to provide life-saving assistance and protection for the millions of people who depend on it to survive.</p>
+
+            <p>((graph)) Funding requirements and gaps as of July 2020</p>
+
+            <p>You can help.<br>Donate now</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+<!--     <footer>
+      <p>Acknowledgements: This data story was developed by OCHA’s Centre for Humanitarian Data in The Hague through its Data Fellows Programme 2020. The Centre worked closely with OCHA Yemen to develop the narrative and to ensure the figures and timeline are accurate. The story is based on the actual experience of a displaced family in Yemen, although the names Ali and Fariha are fictional.</p>
+      <p>Learn more about the UN’s work in <a href='www.unocha.org/yemen' target='_blank'>Yemen</a>.</p>
+    </footer> -->
+
+    <script type='text/javascript' src='js/bundle.min.js'></script>
+  </body>
+</html>

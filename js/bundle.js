@@ -1,36 +1,111 @@
 window.$ = window.jQuery = require('jquery');
-function hxlProxyToJSON(input){
-    var output = [];
-    var keys=[]
-    input.forEach(function(e,i){
-        if(i==0){
-            e.forEach(function(e2,i2){
-                var parts = e2.split('+');
-                var key = parts[0]
-                if(parts.length>1){
-                    var atts = parts.splice(1,parts.length);
-                    atts.sort();                    
-                    atts.forEach(function(att){
-                        key +='+'+att
-                    });
-                }
-                keys.push(key);
-            });
-        } else {
-            var row = {};
-            e.forEach(function(e2,i2){
-                row[keys[i2]] = e2;
-            });
-            output.push(row);
+//import "intersection-observer";
+//import scrollama from "scrollama"; // or...
+require("intersection-observer");
+const scrollama = require("scrollama");
+const config = {
+  chapters: [
+    {
+      id: 'step1',
+      location: {
+        center: [42.97983, 14.73442],
+        zoom: 9,
+        pitch: 0,
+        bearing: 0
+      },
+      onChapterEnter: [
+        {
+          layer: 'route-1',
+          opacity: 1
         }
-    });
-    return output;
-}
+      ],
+      onChapterExit: [
+        {
+          layer: 'route-1',
+          opacity: 0
+        }
+      ]
+    },
+    {
+      id: 'step2',
+      location: {
+        center: [ 43.32446, 14.51635],
+        zoom: 12,
+        pitch: 10,
+        bearing: 20
+      },
+      onChapterEnter: [
+        {
+          layer: 'route-2',
+          opacity: 1
+        }
+      ],
+      onChapterExit: [
+        {
+          layer: 'route-2',
+          opacity: 0
+        }
+      ]
+    },
+    {
+      id: 'step3',
+      location: {
+        center: [ 43.82152, 13.23558],
+        zoom: 8.39,
+        pitch: 30,
+        bearing: 30
+      },
+      onChapterEnter: [
+        {
+          layer: 'route-3',
+          opacity: 1
+        }
+      ],
+      onChapterExit: [
+        {
+          layer: 'route-3',
+          opacity: 0
+        }
+      ]
+    },
+    {
+      id: 'step4',
+      location: {
+        center: [ 45.01073, 12.79255],
+        zoom: 13.34,
+        pitch: 0,
+        bearing: 0
+      },
+      // onChapterEnter: [
+      //   {
+      //     layer: 'route-4',
+      //     opacity: 1
+      //   }
+      // ],
+      // onChapterExit: [
+      //   {
+      //     layer: 'route-4',
+      //     opacity: 0
+      //   }
+      // ]
+    }
+  ]
+};
+
+
 $( document ).ready(function() {
   const DATA_URL = 'data/';
   let isMobile = $(window).width()<600? true : false;
   let dataUrls = ['geodata_locations.geojson'];
-  var map;
+  var map, scroller, main, scrolly, figure, article, step;
+  var layerTypes = {
+    'fill': ['fill-opacity'],
+    'line': ['line-opacity'],
+    'circle': ['circle-opacity', 'circle-stroke-opacity'],
+    'symbol': ['icon-opacity', 'text-opacity'],
+    'raster': ['raster-opacity'],
+    'fill-extrusion': ['fill-extrusion-opacity']
+  }
   mapboxgl.accessToken = 'pk.eyJ1IjoiaHVtZGF0YSIsImEiOiJja2FvMW1wbDIwMzE2MnFwMW9teHQxOXhpIn0.Uri8IURftz3Jv5It51ISAA';
   
 
@@ -58,7 +133,7 @@ $( document ).ready(function() {
     console.log('Loading map...')
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/humdata/ckdhth3bq06af1hp9gayo0ywq',
+      style: 'mapbox://styles/humdata/ckdhth3bq06af1hp9gayo0ywq/draft',
       center: [47, 20],
       minZoom: 1,
       zoom: 4.7,
@@ -68,26 +143,110 @@ $( document ).ready(function() {
     //map.addControl(new mapboxgl.NavigationControl())
     map.addControl(new mapboxgl.AttributionControl(), 'bottom-right');
 
+    // disable map zoom when using scroll
+    map.scrollZoom.disable();
+
     map.on('load', function() {
       console.log('Map loaded')
     });
 
-    // $(window).scroll(function() {
-    //   var top_of_element = $(".article").offset().top;
-    //   var bottom_of_element = $(".article").offset().top + $(".article").outerHeight();
-    //   var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
-    //   var top_of_screen = $(window).scrollTop();
+    // using d3 for convenience
+    main = d3.select("main");
+    scrolly = main.select("#scrolly");
+    figure = scrolly.select("figure");
+    article = scrolly.select("article");
+    step = article.selectAll(".step");
 
-    //   if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
-    //     console.log('article starts')
-    //     $('.feature').css('position','absolute')
-    //       // the element is visible, do something
-    //   } else {
-    //     $('.feature').css('position','fixed')
-    //     console.log('nope')
-    //       // the element is not visible, do something else
-    //   }
-    // });
+    // initialize the scrollama
+    scroller = scrollama();
+
+    // kick things off
+    init();
+  }
+
+  // generic window resize listener event
+  function handleResize() {
+    // 1. update height of step elements
+    var stepH = Math.floor(window.innerHeight);
+    step.style("height", stepH + "px");
+
+    var figureHeight = window.innerHeight;
+    var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+    figure
+      .style("height", figureHeight + "px")
+      .style("top", figureMarginTop + "px");
+
+    // 3. tell scrollama to update new element dimensions
+    scroller.resize();
+  }
+
+  // scrollama event handlers
+  function handleStepEnter(response) {
+    console.log('handleStepEnter',response)
+
+    $('.arrow-down').hide();
+
+    // response = { element, direction, index }
+
+    // add color to current step only
+    step.classed('is-active', function(d, i) {
+      return i === response.index;
+    });
+
+    // update graphic based on step
+    //figure.select("p").text(response.index + 1);
+
+    var chapter = config.chapters[response.index];
+    var location = chapter.location;
+
+    if (location!=undefined) {
+      map.flyTo(location);
+    }
+
+    if (chapter.onChapterEnter!=undefined && chapter.onChapterEnter.length > 0) {
+      chapter.onChapterEnter.forEach(setLayerOpacity);
+    }
+  }
+
+  function setupStickyfill() {
+    d3.selectAll(".sticky").each(function() {
+      Stickyfill.add(this);
+    });
+  }
+
+  function getLayerPaintType(layer) {
+    console.log('getLayerPaintType',layer)
+    var layerType = map.getLayer(layer).type;
+    return layerTypes[layerType];
+  }
+
+  function setLayerOpacity(layer) {
+    var paintProps = getLayerPaintType(layer.layer);
+    paintProps.forEach(function(prop) {
+      map.setPaintProperty(layer.layer, prop, layer.opacity);
+    });
+  }
+
+  function init() {
+    setupStickyfill();
+
+    // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+    handleResize();
+
+    // 2. setup the scroller passing options
+    //    this will also initialize trigger observations
+    // 3. bind scrollama event handlers (this can be chained like below)
+    scroller
+      .setup({
+        step: '#scrolly article .step',
+        offset: 0.5,
+        debug: false
+      })
+      .onStepEnter(handleStepEnter);
+
+    // setup resize event
+    window.addEventListener('resize', handleResize);
   }
 
   function initTracking() {
