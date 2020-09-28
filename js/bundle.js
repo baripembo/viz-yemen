@@ -7,6 +7,7 @@ const config = {
   chapters: [
     {
       id: 'step1',
+      distance: '63.5',
       location: {
         center: [42.97983, 14.73442],
         zoom: 9,
@@ -28,6 +29,7 @@ const config = {
     },
     {
       id: 'step2',
+      distance: '275.5',
       location: {
         center: [ 43.32446, 14.51635],
         zoom: 12,
@@ -49,6 +51,7 @@ const config = {
     },
     {
       id: 'step3',
+      distance: '462',
       location: {
         center: [ 43.82152, 13.23558],
         zoom: 8.39,
@@ -70,6 +73,7 @@ const config = {
     },
     {
       id: 'step4',
+      distance: '462',
       location: {
         center: [ 45.01073, 12.79255],
         zoom: 13.34,
@@ -185,6 +189,8 @@ $( document ).ready(function() {
   function handleStepEnter(response) {
     console.log('handleStepEnter',response)
 
+
+    $('.ticker').addClass('active');
     $('.arrow-down').hide();
 
     // response = { element, direction, index }
@@ -207,6 +213,14 @@ $( document ).ready(function() {
     if (chapter.onChapterEnter!=undefined && chapter.onChapterEnter.length > 0) {
       chapter.onChapterEnter.forEach(setLayerOpacity);
     }
+
+    if (response.index<config.chapters.length-1)
+      updateTicker(chapter.distance);
+  }
+
+  function handleStepExit(response) {
+    if (response.index==config.chapters.length-1)
+      $('.ticker').removeClass('active');
   }
 
   function setupStickyfill() {
@@ -228,6 +242,19 @@ $( document ).ready(function() {
     });
   }
 
+  function updateTicker(value) {
+    $('.ticker p').animate({
+      opacity: 0,
+      marginTop: '50px',
+    }, 400, function() {
+      $(this).text(value + ' km. XXX days.');
+      $(this).css('marginTop', '-50px').animate({
+        opacity: 1,
+        marginTop: '0'
+      }, 400);
+    });
+  }
+
   function init() {
     setupStickyfill();
 
@@ -243,7 +270,8 @@ $( document ).ready(function() {
         offset: 0.5,
         debug: false
       })
-      .onStepEnter(handleStepEnter);
+      .onStepEnter(handleStepEnter)
+      .onStepExit(handleStepExit);
 
     // setup resize event
     window.addEventListener('resize', handleResize);
