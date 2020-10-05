@@ -1200,7 +1200,7 @@ footer {
   width: 100%; }
 
 .bg-gradient {
-  background-image: linear-gradient(#347ab4, rgba(55, 122, 180, 0));
+  background-image: linear-gradient(black, rgba(255, 255, 255, 0));
   height: 100%;
   position: absolute;
   top: 0;
@@ -1212,7 +1212,7 @@ footer {
   position: absolute;
   width: 100vw; }
   #intro .inner {
-    color: #505050;
+    color: #FFF;
     left: 50%;
     position: absolute;
     top: 50%;
@@ -1236,7 +1236,7 @@ footer {
           color: #F2645A; }
 
 .header-body p {
-  color: #505050;
+  color: #FFF;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -1280,28 +1280,36 @@ figure p {
   height: 100vh;
   margin: 0 auto 2rem auto;
   opacity: 0.3;
+  position: relative;
   transition: opacity 0.3s ease; }
   .step div {
-    background-color: #444;
+    background-color: rgba(0, 0, 0, 0.7);
     color: #FFF;
-    padding: 15px 25px; }
+    padding: 15px 25px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); }
   .step:last-child {
     margin-bottom: 0; }
   .step.is-active {
     opacity: 1; }
 
-#outro p {
+#outro p,
+#conclusion p {
   font-size: 14px;
   line-height: 26px; }
 
-#outro div {
+#outro > div,
+#conclusion > div {
   margin: 60px auto;
   width: 550px; }
 
-#outro img {
+#outro img,
+#conclusion img {
   margin: 50px 0;
   width: 100%; }
-  #outro img.with-title {
+  #outro img.with-title,
+  #conclusion img.with-title {
     margin-top: 5px; }
 
 .flourish-credit {
@@ -1328,6 +1336,38 @@ figure p {
     padding: 0;
     text-align: center; }
 
+.annotation {
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  margin: 0 auto;
+  opacity: 0;
+  padding: 20px;
+  text-align: center;
+  width: 50%; }
+
+#slideshow .slideshow-inner {
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: relative;
+  top: 0;
+  transform: translate3d(0, 0, 0);
+  width: 100%; }
+  #slideshow .slideshow-inner .img-container {
+    opacity: 1;
+    transition: opacity .5s ease; }
+    #slideshow .slideshow-inner .img-container img {
+      display: block;
+      height: 100% !important;
+      left: 0;
+      object-fit: cover;
+      object-position: 50% 100%;
+      position: absolute;
+      top: 50%;
+      transform: translate3d(0, -50%, 0);
+      width: 100%; }
+
 .arrow-down {
   bottom: 30px;
   left: 50%;
@@ -1335,7 +1375,7 @@ figure p {
   transform: translateX(-50%);
   z-index: 2; }
   .arrow-down i {
-    color: #F2645A;
+    color: #FFF;
     font-size: 25px; }
 
 .bounce {

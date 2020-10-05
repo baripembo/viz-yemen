@@ -1,8 +1,4 @@
 window.$ = window.jQuery = require('jquery');
-//import "intersection-observer";
-//import scrollama from "scrollama"; // or...
-require("intersection-observer");
-const scrollama = require("scrollama");
 const config = {
   chapters: [
     {
@@ -10,7 +6,7 @@ const config = {
       distance: '63.5',
       location: {
         center: [42.97983, 14.73442],
-        zoom: 9,
+        zoom: 10,
         pitch: 0,
         bearing: 0
       },
@@ -31,8 +27,8 @@ const config = {
       id: 'step2',
       distance: '275.5',
       location: {
-        center: [ 43.32446, 14.51635],
-        zoom: 12,
+        center: [ 43.24287, 14.13156],
+        zoom: 8.7,
         pitch: 10,
         bearing: 20
       },
@@ -53,10 +49,10 @@ const config = {
       id: 'step3',
       distance: '462',
       location: {
-        center: [ 43.82152, 13.23558],
-        zoom: 8.39,
-        pitch: 30,
-        bearing: 30
+        center: [ 44.14, 13.09954],
+        zoom: 8.7,
+        pitch: 0,
+        bearing: 0
       },
       onChapterEnter: [
         {
@@ -77,8 +73,8 @@ const config = {
       location: {
         center: [ 45.01073, 12.79255],
         zoom: 13.34,
-        pitch: 0,
-        bearing: 0
+        pitch: 30,
+        bearing: 30
       },
       // onChapterEnter: [
       //   {
@@ -96,21 +92,72 @@ const config = {
   ]
 };
 
+// generic window resize listener event
+function handleResize() {
+  // 1. update height of step elements
+  var stepH = Math.floor(window.innerHeight);
+  step.style("height", stepH + "px");
+
+  var figureHeight = window.innerHeight;
+  var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+  figure
+    .style("height", figureHeight + "px")
+    .style("top", figureMarginTop + "px");
+
+  // 3. tell scrollama to update new element dimensions
+  scroller.resize();
+}
+
+function setupStickyfill() {
+  d3.selectAll(".sticky").each(function() {
+    Stickyfill.add(this);
+  });
+}
+
+function getLayerPaintType(layer) {
+  if (map.getLayer(layer)!=undefined) {
+    var layerType = map.getLayer(layer).type;
+    return layerTypes[layerType];
+  }
+}
+
+function setLayerOpacity(layer) {
+  var paintProps = getLayerPaintType(layer.layer);
+  if (paintProps!=undefined) {
+    paintProps.forEach(function(prop) {
+      map.setPaintProperty(layer.layer, prop, layer.opacity);
+    });
+  }
+}
+
+function setMapBounds(points, padding) {
+  let bbox = turf.extent(points);
+  // if (isMobile)
+  //   map.fitBounds(bbox, {padding: {top: 80, bottom: 80, left: 60, right: 60}});
+  // else
+    map.fitBounds(bbox, {offset: [-100,0], padding: padding});
+}
+
+var map, scroller, main, scrolly, figure, article, step, geoDataArray, viewportHeight;
+var currentIndex = 1;
+var layerTypes = {
+  'fill': ['fill-opacity'],
+  'line': ['line-opacity'],
+  'circle': ['circle-opacity', 'circle-stroke-opacity'],
+  'symbol': ['icon-opacity', 'text-opacity'],
+  'raster': ['raster-opacity'],
+  'fill-extrusion': ['fill-extrusion-opacity']
+}
+
 
 $( document ).ready(function() {
   const DATA_URL = 'data/';
-  let isMobile = $(window).width()<600? true : false;
-  let dataUrls = ['geodata_locations.geojson'];
-  var map, scroller, main, scrolly, figure, article, step;
-  var layerTypes = {
-    'fill': ['fill-opacity'],
-    'line': ['line-opacity'],
-    'circle': ['circle-opacity', 'circle-stroke-opacity'],
-    'symbol': ['icon-opacity', 'text-opacity'],
-    'raster': ['raster-opacity'],
-    'fill-extrusion': ['fill-extrusion-opacity']
-  }
+  var isMobile = $(window).width()<600? true : false;
+  var dataUrls = ['route1.geojson', 'route2.geojson', 'route3.geojson'];
+  geoDataArray = new Array(dataUrls.length);
   mapboxgl.accessToken = 'pk.eyJ1IjoiaHVtZGF0YSIsImEiOiJja2FvMW1wbDIwMzE2MnFwMW9teHQxOXhpIn0.Uri8IURftz3Jv5It51ISAA';
+  viewportHeight = window.innerHeight;
   
 
   function getData() {
@@ -128,16 +175,74 @@ $( document ).ready(function() {
     xhr.send();
   }
 
+  var countArray = new Array(dataUrls.length);
   function parseData(geoData, index) {
-    //do something with the data
-    //console.log(geoData, index)
+    //create map routes
+    countArray[index] = 0;
+    geoDataArray[index] = geoData;
+    //tickerArray[index] = geoData.features[0].properties.ticker;
+    var layer = 'layer'+index;
+    var geo = {
+      'type': 'FeatureCollection',
+      'features': [{
+        'type': 'Feature',
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': [geoData.features[0].geometry.coordinates[0]]
+        }
+      }]
+    };
+
+    map.addLayer({
+      'id': layer,
+      'type': 'line',
+      'source': {
+        'type': 'geojson',
+        'data': geo
+      },
+      'layout': {
+        'line-join': 'miter',
+        'line-cap': 'butt'
+      },
+      'paint': {
+        'line-color': '#FFF',//#347BC4',
+        'line-width': 3,
+        'line-dasharray': [2, 2],
+      }
+    })//, 'place-town'
   }
+
+
+  var animation; 
+  var animationIndex = 0;
+  var animationDone = true;
+  function animateLine() {
+    var geoData = geoDataArray[animationIndex];
+    var layer = 'layer'+animationIndex;
+    var count = countArray[animationIndex]++;
+    if (geoData!=undefined && count<geoData.features[0].geometry.coordinates.length) {
+      var newGeo = map.getSource(layer)._data;
+      newGeo.features[0].geometry.coordinates.push(geoData.features[0].geometry.coordinates[count]);
+      map.getSource(layer).setData(newGeo);
+
+      animation = requestAnimationFrame(function() {
+        animateLine();
+      });
+    }
+    else {
+      animationDone = true;
+      animationIndex++;
+      if (currentIndex>=animationIndex) animateLine();
+    }
+  }
+
 
   function initMap() {
     console.log('Loading map...')
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/humdata/ckdhth3bq06af1hp9gayo0ywq/draft',
+      style: 'mapbox://styles/hsw98/cjx44orzy51b21cqttgaolgq0',//mapbox://styles/mapbox/satellite-v9',
+      //style: 'mapbox://styles/humdata/ckdhth3bq06af1hp9gayo0ywq/draft',
       center: [47, 20],
       minZoom: 1,
       zoom: 4.7,
@@ -146,50 +251,119 @@ $( document ).ready(function() {
 
     //map.addControl(new mapboxgl.NavigationControl())
     map.addControl(new mapboxgl.AttributionControl(), 'bottom-right');
-
-    // disable map zoom when using scroll
     map.scrollZoom.disable();
 
     map.on('load', function() {
       console.log('Map loaded')
+      getData();
+      initJourney();
+      initSections();
+      initSlideshow();
     });
-
-    // using d3 for convenience
-    main = d3.select("main");
-    scrolly = main.select("#scrolly");
-    figure = scrolly.select("figure");
-    article = scrolly.select("article");
-    step = article.selectAll(".step");
-
-    // initialize the scrollama
-    scroller = scrollama();
-
-    // kick things off
-    init();
   }
 
-  // generic window resize listener event
-  function handleResize() {
-    // 1. update height of step elements
-    var stepH = Math.floor(window.innerHeight);
-    step.style("height", stepH + "px");
 
-    var figureHeight = window.innerHeight;
-    var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+  function initJourney() {
+    scroller = scrollama();
+    main = d3.select('main');
+    scrolly = main.select('#scrolly');
+    figure = scrolly.select('figure');
+    article = scrolly.select('article');
+    step = article.selectAll('.step');
 
-    figure
-      .style("height", figureHeight + "px")
-      .style("top", figureMarginTop + "px");
+    setupStickyfill();
+    handleResize();
 
-    // 3. tell scrollama to update new element dimensions
-    scroller.resize();
+    scroller
+      .setup({
+        step: '.step',
+        offset: 0.5,
+        debug: false
+      })
+      .onStepEnter(handleStepEnter)
+      .onStepExit(handleStepExit);
+
+    // setup resize event
+    window.addEventListener('resize', handleResize);
+  }
+
+
+  function initSections() {
+    var controller = new ScrollMagic.Controller();
+    
+    $('.pin-container').each(function() {
+      var id = $(this).attr('id');
+      var containerHeight = $(this).find(' div').innerHeight();
+      var annotationHeight = $(this).find('.annotation').innerHeight();
+      var pinSceneTimeline = new TimelineMax();
+      var newY = containerHeight/2 + annotationHeight/2;
+      pinSceneTimeline.fromTo($(this).find('.annotation'), 0.2, {y: '+='+viewportHeight/2}, {y: -newY, autoAlpha: 1, ease:Power1.easeNone});
+
+      var pinScene = new ScrollMagic.Scene({
+        triggerElement: ('#' + id), 
+        triggerHook: 0.5,
+        duration: '100%', 
+        offset: containerHeight/2,
+        //reverse: false
+      })
+      //.addIndicators({name: '1'})
+      .setPin('#' + id)
+      .setTween(pinSceneTimeline)
+      .addTo(controller);
+    });    
+  }
+
+  function initSlideshow() {
+    var slideshowController = new ScrollMagic.Controller();
+    
+    // var id = $(this).attr('id');
+    // var containerHeight = $(this).find(' div').innerHeight();
+    // var annotationHeight = $(this).find('.annotation').innerHeight();
+    // var pinSceneTimeline = new TimelineMax();
+    // var newY = containerHeight/2 + annotationHeight/2;
+    // pinSceneTimeline.fromTo($(this).find('.annotation'), 0.2, {y: '+='+viewportHeight/2}, {y: -newY, autoAlpha: 1, ease:Power1.easeNone});
+    var numSlides = $('.slideshow-inner').find('.img-container').length;
+    console.log('numSlides',numSlides)
+    var pinScene = new ScrollMagic.Scene({
+      triggerElement: '#slideshow', 
+      triggerHook: 0.5,
+      duration: '300%', 
+      offset: viewportHeight/2
+    })
+    //.addIndicators({name: '1'})
+    .setPin('#slideshow')
+    //.setTween(pinSceneTimeline)
+    // .on('update', function(e) {
+    //   console.log(e.target.controller().info('scrollDirection'));
+    // })
+    .on('progress', function (e) {
+      //console.log(parseFloat(e.progress.toFixed(2)))
+      var progress = parseFloat(e.progress.toFixed(2));
+      console.log(e.target.controller().info('scrollDirection'), progress);
+      if (e.target.controller().info('scrollDirection')=='FORWARD') {
+        if (progress>=0.3 && progress<=0.6) {
+          $('.slideshow-inner').find('.img-container[data-slide="3"').css('opacity', 0);
+        }
+        else if (progress>=0.6 && progress<=1) {
+          $('.slideshow-inner').find('.img-container[data-slide="2"').css('opacity', 0);
+        }
+      }
+      else {
+        if (progress<0.6 && progress>=0.3) {
+          $('.slideshow-inner').find('.img-container[data-slide="2"').css('opacity', 1);
+        }
+        else if (progress<0.3 && progress>=0) {
+          $('.slideshow-inner').find('.img-container[data-slide="3"').css('opacity', 1);
+        }
+      }
+    })
+    .addTo(slideshowController);
   }
 
   // scrollama event handlers
   function handleStepEnter(response) {
-    console.log('handleStepEnter',response)
-
-
+    //console.log('handleStepEnter',response)
+    currentIndex = response.index;
     $('.ticker').addClass('active');
     $('.arrow-down').hide();
 
@@ -210,8 +384,18 @@ $( document ).ready(function() {
       map.flyTo(location);
     }
 
-    if (chapter.onChapterEnter!=undefined && chapter.onChapterEnter.length > 0) {
-      chapter.onChapterEnter.forEach(setLayerOpacity);
+    // if (chapter.onChapterEnter!=undefined && chapter.onChapterEnter.length > 0) {
+    //   chapter.onChapterEnter.forEach(setLayerOpacity);
+    // }
+
+    //console.log('handleStepEnter', response.index, geoDataArray[currentIndex])
+    if (geoDataArray[response.index]!==undefined) {
+      //var padding = 100;
+      //setMapBounds(geoDataArray[response.index], padding);
+      if (animationDone) {
+        animateLine();
+        animationDone = false;
+      }
     }
 
     if (response.index<config.chapters.length-1)
@@ -219,27 +403,20 @@ $( document ).ready(function() {
   }
 
   function handleStepExit(response) {
-    if (response.index==config.chapters.length-1)
+    console.log('handleStepExit', response.index)
+    if (response.index==0 || response.index==config.chapters.length-1) {
       $('.ticker').removeClass('active');
-  }
+    }
 
-  function setupStickyfill() {
-    d3.selectAll(".sticky").each(function() {
-      Stickyfill.add(this);
-    });
-  }
-
-  function getLayerPaintType(layer) {
-    console.log('getLayerPaintType',layer)
-    var layerType = map.getLayer(layer).type;
-    return layerTypes[layerType];
-  }
-
-  function setLayerOpacity(layer) {
-    var paintProps = getLayerPaintType(layer.layer);
-    paintProps.forEach(function(prop) {
-      map.setPaintProperty(layer.layer, prop, layer.opacity);
-    });
+    if (response.index==0) {
+      var location = {
+        center: [48.21908, 15.53492],
+        zoom: 6.13,
+        pitch: 0,
+        bearing: 0
+      };
+      map.flyTo(location);
+    }
   }
 
   function updateTicker(value) {
@@ -255,28 +432,6 @@ $( document ).ready(function() {
     });
   }
 
-  function init() {
-    setupStickyfill();
-
-    // 1. force a resize on load to ensure proper dimensions are sent to scrollama
-    handleResize();
-
-    // 2. setup the scroller passing options
-    //    this will also initialize trigger observations
-    // 3. bind scrollama event handlers (this can be chained like below)
-    scroller
-      .setup({
-        step: '#scrolly article .step',
-        offset: 0.5,
-        debug: false
-      })
-      .onStepEnter(handleStepEnter)
-      .onStepExit(handleStepExit);
-
-    // setup resize event
-    window.addEventListener('resize', handleResize);
-  }
-
   function initTracking() {
     //initialize mixpanel
     let MIXPANEL_TOKEN = '';
@@ -287,7 +442,6 @@ $( document ).ready(function() {
     });
   }
 
-  //getData();
   initMap();
   //initTracking();
 });
