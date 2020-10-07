@@ -5,8 +5,8 @@ const config = {
       distance: '63.5',
       location: {
         center: [42.97983, 14.73442],
-        zoom: 10,
-        pitch: 0,
+        zoom: 9.7,
+        pitch: 40,
         bearing: 0
       },
       onChapterEnter: [
@@ -26,10 +26,10 @@ const config = {
       id: 'step2',
       distance: '275.5',
       location: {
-        center: [ 43.24287, 14.13156],
-        zoom: 8.7,
-        pitch: 10,
-        bearing: 20
+        center: [ 43.5815, 13.9194],
+        zoom: 9,
+        pitch: 60,
+        bearing: 325
       },
       onChapterEnter: [
         {
@@ -48,10 +48,10 @@ const config = {
       id: 'step3',
       distance: '462',
       location: {
-        center: [ 44.14, 13.09954],
-        zoom: 8.7,
-        pitch: 0,
-        bearing: 0
+        center: [ 44.6, 13.0037],
+        zoom: 8.9,
+        pitch: 40,
+        bearing: 314
       },
       onChapterEnter: [
         {

@@ -6,7 +6,8 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link rel='icon' type='image/png' href='https://data.humdata.org/images/icons/hdx.ico' />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
     <link href='css/styles.css' rel='stylesheet' />
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
     <script type='text/javascript' src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
@@ -40,7 +41,7 @@
             <a href='#'><i class='humanitarianicons-Favourite'></i></a>
             <a href='#'><i class='humanitarianicons-Multi-cluster-sector'></i></a>
           </div>
-          <h5>July 2020</h5>
+          <!-- <h5>July 2020</h5> -->
           <div class='header-body'>
             <p>More than five years of conflict have left 80 percent of Yemen’s population (over 24 million people) dependent on humanitarian assistance and protection. Continued funding shortages and travel restrictions due to the coronavirus are putting aid operations at risk.</p>
             <p>Follow Ali and his family as they travel from<br>Al Hudaydah to Aden, in search of safety.</p>
@@ -95,13 +96,13 @@
 
           <p>Since the conflict began in March 2015, about 4.3 million people have been displaced. It is estimated that 3.6 million people – more than one in every ten Yemenis – remain displaced today. They are living with host families or in informal sites, such as abandoned buildings, empty schools, camps or out in the open.</p>
 
-          <p>((dot square visualization with figures or annotations: total population, people in need)) Four in five persons are in need of some form of humanitarian assistance or protection</p>
+          <!-- <p>((dot square visualization with figures or annotations: total population, people in need)) Four in five persons are in need of some form of humanitarian assistance or protection</p>
 
           <p>((annotation 1 sliding in over the chart)) Yemen’s population is estimated at 30.5 million people.</p>
           
           <p>((annotation 2 sliding in over the chart)) 24.1 million Yemenis – or 80 percent of the total population – are in need of humanitarian aid.</p>
           
-          <!-- <p>((the dot chart disappears while the line chart appears)) The number of people displaced increased sharply since the conflict broke out in 2015</p> -->
+          <p>((the dot chart disappears while the line chart appears)) The number of people displaced increased sharply since the conflict broke out in 2015</p> -->
 
           <div id='pinFlourish' class='pin-container'>
             <div class="flourish-embed flourish-chart" data-src="visualisation/3035139" data-url="https://flo.uri.sh/visualisation/3035139/embed"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
@@ -115,8 +116,8 @@
 
           <div id='pinFoodInsecurity' class='pin-container'>
             <div><img src='assets/map-food-insecurity.png' /></div>
-            <div class='annotation'>2018 was marked by severe food insecurity, but the situation improved in 2019 as a result of scaled-up humanitarian response.</div>
-            <!-- <div class='annotation'>Due to a lack of funding and as a result of the COVID-19 pandemic, food insecurity is again on the rise in 2020.</div> -->
+            <div class='annotation'>2018 was marked by <b>severe food insecurity</b>, but the situation improved in 2019 as a result of <b>scaled-up humanitarian response.</b></div>
+            <!-- <div class='annotation'>Due to a lack of funding and as a result of the COVID-19 pandemic, food insecurity is <b>again on the rise in 2020.</b></div> -->
           </div>
 
           <p>Economists expect a major contraction of the economy in coming months</p>
@@ -124,7 +125,7 @@
           <div id ='pinEconomy' class='pin-container'>
            <!--  <iframe src="https://data.humdata.org/hxlpreview/show;url=https%3A%2F%2Fdata.humdata.org%2Fdataset%2F98574e10-6866-4f13-a2b1-3c8312801af5%2Fresource%2Fc78846cc-2989-49b5-8dd8-d7364ecdd35d%2Fdownload%2Fwfp_food_median_prices_yemen.csv;embeddedSource=World%2520Food%2520Programme%2520-%2520VAM;embeddedUrl=https%3A%2F%2Fdata.humdata.org%2Fdataset%2F98574e10-6866-4f13-a2b1-3c8312801af5;embeddedDate=September%252020%252C%25202020;embeddedConfig=%7B%22configVersion%22%3A5%2C%22bites%22%3A%5B%7B%22tempShowSaveCancelButtons%22%3Afalse%2C%22ingredient%22%3A%7B%22aggregateColumn%22%3Anull%2C%22valueColumn%22%3A%22%23value%22%2C%22aggregateFunction%22%3A%22sum%22%2C%22dateColumn%22%3A%22%23date%22%2C%22comparisonValueColumn%22%3Anull%2C%22comparisonOperator%22%3Anull%2C%22filters%22%3A%7B%7D%2C%22description%22%3A%22Prices%20of%20food%20commodities.%20Median%20prices%20across%20various%20markets%20are%20shown.%22%7D%2C%22type%22%3A%22timeseries%22%2C%22errorMsg%22%3Anull%2C%22computedProperties%22%3A%7B%22pieChart%22%3Afalse%2C%22title%22%3A%22Sum%20of%20price%20by%20date%22%2C%22dataTitle%22%3A%22price%22%2C%22explainedFiltersMap%22%3A%7B%22remove%20empty%20valued%20rows%22%3A%7B%22filterWith%22%3A%5B%7B%22%23value%22%3A%22is%20not%20empty%22%7D%5D%2C%22filterWithout%22%3A%5B%5D%7D%7D%7D%2C%22uiProperties%22%3A%7B%22swapAxis%22%3Atrue%2C%22showGrid%22%3Afalse%2C%22color%22%3A%22%230077ce%22%2C%22title%22%3A%22Overall%20Commodity%20Price%20Trend%20since%20the%20outbreak%20of%20the%20conflict%22%2C%22description%22%3A%22Sum%20of%20prices%20for%20all%20food%20commodities%20-%20a%20general%20trend%20in%20food%20prices.%20%28Note%3A%20prices%20are%20in%20local%20currency%20and%20are%20not%20weighted.%20Displayed%20values%20depend%20on%20units%20and%20selection%20of%20commodities.%29%22%2C%22sortingByValue1%22%3A%22DESC%22%2C%22internalColorPattern%22%3A%5B%22%231ebfb3%22%2C%22%230077ce%22%2C%22%23f2645a%22%2C%22%239C27B0%22%5D%7D%2C%22dataProperties%22%3A%7B%7D%2C%22displayCategory%22%3A%22Timeseries%22%2C%22hashCode%22%3A411788767%2C%22_configOrder%22%3A0%7D%5D%7D;singleWidgetMode=true;embeddedTitle=Quick Charts;recipeUrl=https%3A%2F%2Fraw.githubusercontent.com%2FOCHA-DAP%2Fhxl-recipes%2F1.0.10%2Fcookbook-library.json;chartSettings=false;chartShare=false" style="border:none; width:100%; min-height:500px"></iframe> -->
             <div><img src='assets/food-prices.png' /></div>
-            <div class='annotation'>Poverty rates have dramatically increased, with an estimated 81 percent of Yemenis now below the poverty line</div>
+            <div class='annotation'>Poverty rates have dramatically increased, with an estimated <b>81 percent</b> of Yemenis now below the poverty line</div>
           </div>
 
           <h3>Health</h3>
@@ -133,7 +134,7 @@
 
           <div id='pinHealthFacilities' class='pin-container'>
             <div><img src='assets/health-facilities.png' /></div>
-            <div class='annotation'>Yemen’s health facilities have been significantly impacted by the conflict</div>
+            <div class='annotation'>Yemen’s health facilities have been significantly impacted by the conflict.</div>
             <!-- <p>((split map of health facilities infrastructure 2015 vs 2020: static maps with points/icons and a year indication, scrolling trigger to switch from one to the other year)) Yemen’s health facilities have been significantly impacted by the conflict</p> -->
           </div>
 
@@ -147,8 +148,6 @@
 
           <h4>Confirmed COVID-19 cases and deaths in Yemen</h4>
           <img class='with-title' src='assets/covid-cases.png' />
-
-          <p>((Quote)) “I have seen posters imploring us to “Stay Home. Stay Safe.” But I don’t have a choice: every day I have to head out to earn enough money to feed my family.”</p>
         </div>
       </section>
 
@@ -170,17 +169,17 @@
         <div>
           <h3>Section 6: Conclusion</h3>
 
-          <h4>We need to act, now.</h4>
+          <h3>We need to act, now.</h3>
 
           <p>((Call to action to fill the funding shortages)) The scale of needs in Yemen is staggering, and the COVID-19 pandemic is worsening the humanitarian situation. But Yemen is also the world’s largest humanitarian operation, counting as of December 2019 with more than 128200 aid organizations working together to assist over 13 million people across the country every month.</p>
 
           <p>Since the war broke out, humanitarian programmes have been making an enormous difference to bring Yemen back from the brink of famine and a resurgent cholera epidemic, as well as to help the millions of people in displacement. However, since mid-April 2020 31 of 41 critical UN programmes have been reduced or closed down due to the significant funding shortages, and as of May 2020 only 96 organizations remain active in the country threaten more than 30 out of 41 major UN supported programmes to close.</p>
 
-          <p>Urgent action is needed to continue delivering principled aid at scale and to provide life-saving assistance and protection for the millions of people who depend on it to survive.</p>
+          <p><b>Urgent action is needed to continue delivering principled aid at scale and to provide life-saving assistance and protection for the millions of people who depend on it to survive.</b></p>
 
           <div class="flourish-embed flourish-chart" data-src="visualisation/3061605" data-url="https://flo.uri.sh/visualisation/3061605/embed"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
-          <p>You can help.</p>
+          <p><b>You can help.</b></p>
           
           <a href=' https://crisisrelief.un.org/yemen' target='_blank' class='button'>Donate now</a>
         </div>

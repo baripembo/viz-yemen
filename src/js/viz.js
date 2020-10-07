@@ -1,13 +1,13 @@
 var map, scroller, main, scrolly, figure, article, step, geoDataArray, viewportHeight;
 var currentIndex = 1;
-var layerTypes = {
-  'fill': ['fill-opacity'],
-  'line': ['line-opacity'],
-  'circle': ['circle-opacity', 'circle-stroke-opacity'],
-  'symbol': ['icon-opacity', 'text-opacity'],
-  'raster': ['raster-opacity'],
-  'fill-extrusion': ['fill-extrusion-opacity']
-}
+// var layerTypes = {
+//   'fill': ['fill-opacity'],
+//   'line': ['line-opacity'],
+//   'circle': ['circle-opacity', 'circle-stroke-opacity'],
+//   'symbol': ['icon-opacity', 'text-opacity'],
+//   'raster': ['raster-opacity'],
+//   'fill-extrusion': ['fill-extrusion-opacity']
+// }
 
 
 $( document ).ready(function() {
@@ -39,7 +39,6 @@ $( document ).ready(function() {
     //create map routes
     countArray[index] = 0;
     geoDataArray[index] = geoData;
-    //tickerArray[index] = geoData.features[0].properties.ticker;
     var layer = 'layer'+index;
     var geo = {
       'type': 'FeatureCollection',
@@ -64,11 +63,10 @@ $( document ).ready(function() {
         'line-cap': 'butt'
       },
       'paint': {
-        'line-color': '#FFF',//#347BC4',
-        'line-width': 3,
-        'line-dasharray': [2, 2],
+        'line-color': '#FFF',
+        'line-width': 3
       }
-    })//, 'place-town'
+    })
   }
 
 
@@ -100,8 +98,7 @@ $( document ).ready(function() {
     console.log('Loading map...')
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/hsw98/cjx44orzy51b21cqttgaolgq0',//mapbox://styles/mapbox/satellite-v9',
-      //style: 'mapbox://styles/humdata/ckdhth3bq06af1hp9gayo0ywq/draft',
+      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/draft',
       center: [47, 20],
       minZoom: 1,
       zoom: 4.7,
@@ -109,7 +106,7 @@ $( document ).ready(function() {
     });
 
     //map.addControl(new mapboxgl.NavigationControl())
-    map.addControl(new mapboxgl.AttributionControl(), 'bottom-right');
+    //map.addControl(new mapboxgl.AttributionControl(), 'bottom-right');
     map.scrollZoom.disable();
 
     map.on('load', function() {
@@ -152,7 +149,7 @@ $( document ).ready(function() {
     
     $('.pin-container').each(function() {
       var id = $(this).attr('id');
-      var containerHeight = $(this).find(' div').innerHeight();
+      var containerHeight = $(this).find('div').innerHeight();
       var annotationHeight = $(this).find('.annotation').innerHeight();
       var pinSceneTimeline = new TimelineMax();
       var newY = containerHeight/2 + annotationHeight/2;
@@ -163,7 +160,6 @@ $( document ).ready(function() {
         triggerHook: 0.5,
         duration: '100%', 
         offset: containerHeight/2,
-        //reverse: false
       })
       //.addIndicators({name: '1'})
       .setPin('#' + id)
@@ -172,72 +168,20 @@ $( document ).ready(function() {
     });    
   }
 
-  function initSlideshow() {
-    var slideshowController = new ScrollMagic.Controller();
-    
-    // var id = $(this).attr('id');
-    // var containerHeight = $(this).find(' div').innerHeight();
-    // var annotationHeight = $(this).find('.annotation').innerHeight();
-    // var pinSceneTimeline = new TimelineMax();
-    // var newY = containerHeight/2 + annotationHeight/2;
-    // pinSceneTimeline.fromTo($(this).find('.annotation'), 0.2, {y: '+='+viewportHeight/2}, {y: -newY, autoAlpha: 1, ease:Power1.easeNone});
-    var numSlides = $('.slideshow-inner').find('.img-container').length;
-    console.log('numSlides',numSlides)
-    var pinScene = new ScrollMagic.Scene({
-      triggerElement: '#slideshow', 
-      triggerHook: 0.5,
-      duration: '300%', 
-      offset: viewportHeight/2
-    })
-    //.addIndicators({name: '1'})
-    .setPin('#slideshow')
-    //.setTween(pinSceneTimeline)
-    // .on('update', function(e) {
-    //   console.log(e.target.controller().info('scrollDirection'));
-    // })
-    .on('progress', function (e) {
-      //console.log(parseFloat(e.progress.toFixed(2)))
-      var progress = parseFloat(e.progress.toFixed(2));
-      console.log(e.target.controller().info('scrollDirection'), progress);
-      if (e.target.controller().info('scrollDirection')=='FORWARD') {
-        if (progress>=0.3 && progress<=0.6) {
-          $('.slideshow-inner').find('.img-container[data-slide="3"').css('opacity', 0);
-        }
-        else if (progress>=0.6 && progress<=1) {
-          $('.slideshow-inner').find('.img-container[data-slide="2"').css('opacity', 0);
-        }
-      }
-      else {
-        if (progress<0.6 && progress>=0.3) {
-          $('.slideshow-inner').find('.img-container[data-slide="2"').css('opacity', 1);
-        }
-        else if (progress<0.3 && progress>=0) {
-          $('.slideshow-inner').find('.img-container[data-slide="3"').css('opacity', 1);
-        }
-      }
-    })
-    .addTo(slideshowController);
-  }
-
   // scrollama event handlers
   function handleStepEnter(response) {
-    //console.log('handleStepEnter',response)
+    //response = { element, direction, index }
     currentIndex = response.index;
+    var chapter = config.chapters[currentIndex];
+    var location = chapter.location;
+
     $('.ticker').addClass('active');
     $('.arrow-down').hide();
 
-    // response = { element, direction, index }
-
-    // add color to current step only
+    // set active step
     step.classed('is-active', function(d, i) {
       return i === response.index;
     });
-
-    // update graphic based on step
-    //figure.select("p").text(response.index + 1);
-
-    var chapter = config.chapters[response.index];
-    var location = chapter.location;
 
     if (location!=undefined) {
       map.flyTo(location);
@@ -247,7 +191,6 @@ $( document ).ready(function() {
     //   chapter.onChapterEnter.forEach(setLayerOpacity);
     // }
 
-    //console.log('handleStepEnter', response.index, geoDataArray[currentIndex])
     if (geoDataArray[response.index]!==undefined) {
       //var padding = 100;
       //setMapBounds(geoDataArray[response.index], padding);
@@ -262,19 +205,18 @@ $( document ).ready(function() {
   }
 
   function handleStepExit(response) {
-    console.log('handleStepExit', response.index)
     if (response.index==0 || response.index==config.chapters.length-1) {
       $('.ticker').removeClass('active');
-    }
 
-    if (response.index==0) {
-      var location = {
-        center: [48.21908, 15.53492],
-        zoom: 6.13,
-        pitch: 0,
-        bearing: 0
-      };
-      map.flyTo(location);
+      if (response.index==0) {
+        var location = {
+          center: [48.21908, 15.53492],
+          zoom: 6.13,
+          pitch: 0,
+          bearing: 0
+        };
+        map.flyTo(location);
+      }
     }
   }
 

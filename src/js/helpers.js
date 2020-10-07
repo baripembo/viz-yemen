@@ -21,26 +21,26 @@ function setupStickyfill() {
   });
 }
 
-function getLayerPaintType(layer) {
-  if (map.getLayer(layer)!=undefined) {
-    var layerType = map.getLayer(layer).type;
-    return layerTypes[layerType];
-  }
-}
+// function getLayerPaintType(layer) {
+//   if (map.getLayer(layer)!=undefined) {
+//     var layerType = map.getLayer(layer).type;
+//     return layerTypes[layerType];
+//   }
+// }
 
-function setLayerOpacity(layer) {
-  var paintProps = getLayerPaintType(layer.layer);
-  if (paintProps!=undefined) {
-    paintProps.forEach(function(prop) {
-      map.setPaintProperty(layer.layer, prop, layer.opacity);
-    });
-  }
-}
+// function setLayerOpacity(layer) {
+//   var paintProps = getLayerPaintType(layer.layer);
+//   if (paintProps!=undefined) {
+//     paintProps.forEach(function(prop) {
+//       map.setPaintProperty(layer.layer, prop, layer.opacity);
+//     });
+//   }
+// }
 
-function setMapBounds(points, padding) {
-  let bbox = turf.extent(points);
-  // if (isMobile)
-  //   map.fitBounds(bbox, {padding: {top: 80, bottom: 80, left: 60, right: 60}});
-  // else
-    map.fitBounds(bbox, {offset: [-100,0], padding: padding});
-}
+// function setMapBounds(points, padding) {
+//   let bbox = turf.extent(points);
+//   if (isMobile)
+//     map.fitBounds(bbox, {padding: {top: 80, bottom: 80, left: 60, right: 60}});
+//   else
+//     map.fitBounds(bbox, {offset: [-100,0], padding: padding});
+// }
