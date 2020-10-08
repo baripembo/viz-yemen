@@ -18,7 +18,7 @@ $( document ).ready(function() {
   mapboxgl.accessToken = 'pk.eyJ1IjoiaHVtZGF0YSIsImEiOiJja2FvMW1wbDIwMzE2MnFwMW9teHQxOXhpIn0.Uri8IURftz3Jv5It51ISAA';
   viewportHeight = window.innerHeight;
   
-
+console.log('viewportHeight',viewportHeight)
   function getData() {
     dataUrls.forEach(function (url, index) {
       loadData(url, function (responseText) {
@@ -113,7 +113,8 @@ $( document ).ready(function() {
       console.log('Map loaded')
       getData();
       initJourney();
-      initSections();
+      initPins();
+      //initSections();
       initSlideshow();
     });
   }
@@ -143,6 +144,26 @@ $( document ).ready(function() {
     window.addEventListener('resize', handleResize);
   }
 
+  function initPins() {
+    $('.pin-container').each(function() {
+      var item = $(this).find('.pin-item')[0];
+      var pos = viewportHeight/2 - $(item).height()/2;
+      $(item).css('top', pos);
+      //$(this).find('.annotation').each(function() {
+        //$(this).find('> div').css('bottom', $(item).height()/2);
+      //});
+    });
+
+
+    var controller = new ScrollMagic.Controller();
+    var pinScene = new ScrollMagic.Scene({
+      triggerElement: "#slide2",
+      triggerHook: 0.6
+    })
+    .setClassToggle("#pinFoodInsecurity", "showSlide2")
+    //.addIndicators()
+    .addTo(controller);
+  }
 
   function initSections() {
     var controller = new ScrollMagic.Controller();
