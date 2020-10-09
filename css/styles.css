@@ -1302,18 +1302,20 @@ figure p {
   .step.is-active {
     opacity: 1; }
 
-#outro > div,
-#conclusion > div {
-  margin: 60px auto;
-  width: 550px; }
-
-#outro img,
-#conclusion img {
-  margin: 50px 0;
-  width: 100%; }
-  #outro img.with-title,
-  #conclusion img.with-title {
-    margin-top: 5px; }
+#outro,
+#conclusion {
+  margin: 80px 0 60px; }
+  #outro > *,
+  #conclusion > * {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px; }
+  #outro img,
+  #conclusion img {
+    width: 100%; }
+    #outro img.with-title,
+    #conclusion img.with-title {
+      margin-top: 5px; }
 
 .flourish-chart {
   margin: 40px 0; }
@@ -1342,31 +1344,51 @@ figure p {
     padding: 0;
     text-align: center; }
 
-.annotation {
-  background-color: #FFF;
-  border: 1px solid #CCC;
-  font-family: 'Arvo', serif;
-  font-size: 13px;
-  line-height: 21px;
+.pin-container {
   margin: 0 auto;
-  opacity: 0;
-  padding: 20px;
-  text-align: center;
-  width: 50%; }
+  width: 700px !important; }
+  .pin-container .pin-item {
+    margin: 0;
+    position: sticky;
+    top: 0; }
 
-#slideshow .slideshow-inner {
-  height: 100vh;
-  left: 0;
-  overflow: hidden;
-  pointer-events: none;
+.annotation {
+  height: 150vh;
   position: relative;
+  z-index: 2; }
+  .annotation > div {
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    font-family: 'Arvo', serif;
+    font-size: 13px;
+    left: 50%;
+    line-height: 21px;
+    margin: 0 auto;
+    position: absolute;
+    padding: 20px;
+    top: 25%;
+    text-align: center;
+    transform: translate(-50%, -25%);
+    width: 50%; }
+
+#pinFoodInsecurity .pin-item #img2 {
+  left: 0;
+  opacity: 0;
+  position: absolute;
   top: 0;
-  transform: translate3d(0, 0, 0);
-  width: 100%; }
-  #slideshow .slideshow-inner .img-container {
-    opacity: 1;
-    transition: opacity .5s ease; }
-    #slideshow .slideshow-inner .img-container img {
+  transition: opacity 0.3s ease; }
+
+#pinFoodInsecurity.showSlide2 .pin-item #img2 {
+  opacity: 1; }
+
+#slideshow .slide-container {
+  margin: 0 auto; }
+  #slideshow .slide-container .pin-item {
+    height: 100vh;
+    margin: 0;
+    position: sticky;
+    top: 0; }
+    #slideshow .slide-container .pin-item img {
       display: block;
       height: 100% !important;
       left: 0;
@@ -1375,7 +1397,25 @@ figure p {
       position: absolute;
       top: 50%;
       transform: translate3d(0, -50%, 0);
+      transition: opacity 1s ease;
       width: 100%; }
+
+#slideshow .caption {
+  height: 100vh;
+  position: relative;
+  z-index: 2; }
+  #slideshow .caption p {
+    width: 25%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-family: 'Arvo', serif;
+    font-size: 13px;
+    left: 5vw;
+    line-height: 21px;
+    margin: 0 auto;
+    position: absolute;
+    padding: 20px;
+    top: 0; }
 
 .arrow-down {
   bottom: 30px;
