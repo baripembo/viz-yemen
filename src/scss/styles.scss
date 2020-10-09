@@ -369,20 +369,15 @@ figure p {
 }
 
 #slideshow {
-	.slideshow-inner {
-		height: 100vh;
-    left: 0;
-    overflow: hidden;
-    pointer-events: none;
-    position: relative;
-    top: 0;
-    transform: translate3d(0, 0, 0);
-    width: 100%;
-    .img-container {
-    	opacity: 1;
-    	transition: opacity .5s ease;  	
-	    img {
-		    display: block;
+	.slide-container {
+		margin: 0 auto;
+		.pin-item {
+			height: 100vh;
+			margin: 0;
+			position: sticky;
+			top: 0;
+			img {
+				display: block;
 		    height: 100% !important;
 		    left: 0;
 		    object-fit: cover;
@@ -390,9 +385,28 @@ figure p {
 		    position: absolute;
 		    top: 50%;
 		    transform: translate3d(0, -50%, 0);
+		    transition: opacity 1s ease;
 	    	width: 100%;
-	    }
-    }
+			}
+		}
+	}
+	.caption {
+		height: 100vh;
+		position: relative;
+		z-index: 2;
+		p {
+			width: 25%;
+	    background-color: rgba(0,0,0,0.8);
+	    color: #fff;
+		  font-family: 'Arvo', serif;
+		  font-size: 13px;
+	    left: 5vw;
+		  line-height: 21px;
+		  margin: 0 auto;
+			position: absolute;
+		  padding: 20px;
+		  top: 0;
+		}
 	}
 }
 

@@ -18,7 +18,6 @@ $( document ).ready(function() {
   mapboxgl.accessToken = 'pk.eyJ1IjoiaHVtZGF0YSIsImEiOiJja2FvMW1wbDIwMzE2MnFwMW9teHQxOXhpIn0.Uri8IURftz3Jv5It51ISAA';
   viewportHeight = window.innerHeight;
   
-console.log('viewportHeight',viewportHeight)
   function getData() {
     dataUrls.forEach(function (url, index) {
       loadData(url, function (responseText) {
@@ -147,49 +146,24 @@ console.log('viewportHeight',viewportHeight)
   function initPins() {
     $('.pin-container').each(function() {
       var item = $(this).find('.pin-item')[0];
-      var pos = viewportHeight/2 - $(item).height()/2;
+      var pos = Math.round(viewportHeight/2 - $(item).height()/2);
       $(item).css('top', pos);
       //$(this).find('.annotation').each(function() {
         //$(this).find('> div').css('bottom', $(item).height()/2);
       //});
     });
 
-
+    //img switch for food security graphic
     var controller = new ScrollMagic.Controller();
     var pinScene = new ScrollMagic.Scene({
       triggerElement: "#slide2",
       triggerHook: 0.6
     })
     .setClassToggle("#pinFoodInsecurity", "showSlide2")
-    //.addIndicators()
     .addTo(controller);
   }
 
-  function initSections() {
-    var controller = new ScrollMagic.Controller();
-    
-    $('.pin-container').each(function() {
-      var id = $(this).attr('id');
-      var containerHeight = $(this).find('div').innerHeight();
-      var annotationHeight = $(this).find('.annotation').innerHeight();
-      var pinSceneTimeline = new TimelineMax();
-      var newY = containerHeight/2 + annotationHeight/2;
-      pinSceneTimeline.fromTo($(this).find('.annotation'), 0.2, {y: '+='+viewportHeight/2}, {y: -newY, autoAlpha: 1, ease:Power1.easeNone});
 
-      var pinScene = new ScrollMagic.Scene({
-        triggerElement: ('#' + id), 
-        triggerHook: 0.5,
-        duration: '100%', 
-        offset: containerHeight/2,
-      })
-      //.addIndicators({name: '1'})
-      .setPin('#' + id)
-      .setTween(pinSceneTimeline)
-      .addTo(controller);
-    });    
-  }
-
-  // scrollama event handlers
   function handleStepEnter(response) {
     //response = { element, direction, index }
     currentIndex = response.index;
