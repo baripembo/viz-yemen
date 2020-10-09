@@ -1,18 +1,6 @@
 @font-face {
-  font-family: 'Gotham-Bold';
-  src: url("../assets/fonts/Gotham-Bold.otf") format("truetype");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Gotham-Book';
-  src: url("../assets/fonts/Gotham-Book.otf") format("truetype");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Gotham-Light';
-  src: url("../assets/fonts/Gotham-Light.otf") format("truetype");
+  font-family: 'Stag-Book';
+  src: url("../assets/fonts/Stag-Book.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 
@@ -1113,6 +1101,7 @@ h2 {
 h3 {
   color: #3D3D3D;
   font-size: 25px;
+  font-family: 'Stag-Book', serif;
   font-weight: bold;
   line-height: 29px; }
 
@@ -1167,7 +1156,7 @@ footer {
     footer .inner .left {
       width: 60%; }
     footer .inner .right {
-      margin-top: 11px;
+      margin-top: 28px;
       text-align: right;
       width: 40%; }
     footer .inner .key-figure {
@@ -1359,7 +1348,7 @@ figure p {
   .annotation > div {
     background-color: #FFF;
     border: 1px solid #CCC;
-    font-family: 'Arvo', serif;
+    font-family: 'Stag-Book', serif;
     font-size: 13px;
     left: 50%;
     line-height: 21px;
@@ -1408,7 +1397,7 @@ figure p {
     width: 25%;
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
-    font-family: 'Arvo', serif;
+    font-family: 'Stag-Book', serif;
     font-size: 13px;
     left: 5vw;
     line-height: 21px;
