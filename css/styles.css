@@ -5,6 +5,18 @@
   font-style: normal; }
 
 @font-face {
+  font-family: 'Stag-Medium';
+  src: url("../assets/fonts/Stag-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Stag-Semibold';
+  src: url("../assets/fonts/Stag-Semibold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
   font-family: 'Humanitarian-Icons-v02';
   src: url("../assets/fonts/Humanitarian-Icons-v02.eot?d5h7ar");
   src: url("../assets/fonts/Humanitarian-Icons-v02.eot?d5h7ar#iefix") format("embedded-opentype"), url("../assets/fonts/Humanitarian-Icons-v02.ttf?d5h7ar") format("truetype"), url("../assets/fonts/Humanitarian-Icons-v02.woff?d5h7ar") format("woff"), url("../assets/fonts/Humanitarian-Icons-v02.svg?d5h7ar#Humanitarian-Icons-v02") format("svg");
@@ -1206,9 +1218,11 @@ footer {
     color: #FFF;
     left: 50%;
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: 55%;
+    transform: translate(-50%, -55%);
     z-index: 1; }
+    #intro .inner h2 {
+      margin: 5px 0 50px; }
     #intro .inner .social-icons {
       position: absolute;
       right: -120px;
@@ -1239,7 +1253,7 @@ footer {
   background-color: #F3F3F3; }
 
 article {
-  margin: 0 auto 0 5vw;
+  margin: 50vh auto 0 5vw;
   padding: 0;
   position: relative;
   width: 32vw; }
@@ -1279,10 +1293,7 @@ figure p {
   .step div {
     background-color: rgba(0, 0, 0, 0.7);
     color: #FFF;
-    padding: 15px 25px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%); }
+    padding: 15px 25px; }
     .step div p {
       line-height: 20px;
       margin: 18px 0; }
@@ -1343,6 +1354,7 @@ figure p {
 
 .annotation {
   height: 150vh;
+  pointer-events: none;
   position: relative;
   z-index: 2; }
   .annotation > div {
