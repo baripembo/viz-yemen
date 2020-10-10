@@ -1371,6 +1371,8 @@ figure p {
     text-align: center;
     transform: translate(-50%, -25%);
     width: 50%; }
+    .annotation > div b {
+      font-family: 'Stag-Semibold', serif; }
 
 #pinFoodInsecurity .pin-item #img2 {
   left: 0;
