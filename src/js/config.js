@@ -48,8 +48,8 @@ const config = {
       id: 'step3',
       distance: '462',
       location: {
-        center: [ 44.6, 13.0037],
-        zoom: 8.9,
+        center: [ 44.5155, 13.0651],
+        zoom: 8.6,
         pitch: 40,
         bearing: 314
       },
@@ -70,10 +70,10 @@ const config = {
       id: 'step4',
       distance: '462',
       location: {
-        center: [ 45.01073, 12.79255],
-        zoom: 13.34,
+        center: [ 45.0208, 12.7864],
+        zoom: 14.5,
         pitch: 30,
-        bearing: 30
+        bearing: 40
       },
       // onChapterEnter: [
       //   {

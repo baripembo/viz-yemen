@@ -133,7 +133,7 @@ $( document ).ready(function() {
     scroller
       .setup({
         step: '.step',
-        offset: 0.5,
+        offset: 0.7,
         debug: false
       })
       .onStepEnter(handleStepEnter)

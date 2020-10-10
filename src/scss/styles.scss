@@ -42,6 +42,7 @@ h2 {
 h3 {
 	color: #3D3D3D;
 	font-size: 25px;
+	font-family: 'Stag-Book', serif;
 	font-weight: bold;
 	line-height: 29px;
 }
@@ -105,7 +106,7 @@ footer {
 			width: 60%;
 		}
 		.right {
-			margin-top: 11px;
+			margin-top: 28px;
 			text-align: right;
 			width: 40%;
 		}
@@ -164,12 +165,15 @@ footer {
 	position: absolute;
 	width: 100vw;
 	.inner {
-		color: #FFF;//#505050;
+		color: #FFF;
 		left: 50%;
 		position: absolute;
-		top: 50%;
-		transform: translate(-50%, -50%);
+		top: 55%;
+		transform: translate(-50%, -55%);
 		z-index: 1;
+		h2 {
+			margin: 5px 0 50px;
+		}
 		.social-icons {
 			position: absolute;
 		  right: -120px;
@@ -209,7 +213,7 @@ footer {
 }
 
 article {
-  margin: 0 auto 0 5vw;
+  margin: 50vh auto 0 5vw;
   padding: 0;
   position: relative;
   width: 32vw;
@@ -254,9 +258,6 @@ figure p {
   	background-color: rgba(0,0,0,0.7);
   	color: #FFF;
 	  padding: 15px 25px;
-	  position: absolute;
-	  top: 50%;
-	  transform: translateY(-50%);
 	  p {
 	  	line-height: 20px;
 	  	margin: 18px 0;
@@ -268,6 +269,10 @@ figure p {
 	&.is-active {
 		opacity: 1;
 	}
+}
+
+.map-overlay {
+
 }
 
 #outro,
@@ -330,12 +335,13 @@ figure p {
 
 .annotation {
 	height: 150vh;
+	pointer-events: none;
 	position: relative;
 	z-index: 2;
 	> div {
 		background-color: #FFF;
 	  border: 1px solid #CCC;
-	  font-family: 'Arvo', serif;
+	  font-family: 'Stag-Book', serif;
 	  font-size: 13px;
     left: 50%;
 	  line-height: 21px;
@@ -398,7 +404,7 @@ figure p {
 			width: 25%;
 	    background-color: rgba(0,0,0,0.8);
 	    color: #fff;
-		  font-family: 'Arvo', serif;
+		  font-family: 'Stag-Book', serif;
 		  font-size: 13px;
 	    left: 5vw;
 		  line-height: 21px;
