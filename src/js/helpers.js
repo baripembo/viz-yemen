@@ -37,10 +37,10 @@ function setupStickyfill() {
 //   }
 // }
 
-// function setMapBounds(points, padding) {
-//   let bbox = turf.extent(points);
-//   if (isMobile)
-//     map.fitBounds(bbox, {padding: {top: 80, bottom: 80, left: 60, right: 60}});
-//   else
-//     map.fitBounds(bbox, {offset: [-100,0], padding: padding});
-// }
+function setMapBounds(points, padding) {
+  let bbox = turf.extent(points);
+  if (isMobile)
+    map.fitBounds(bbox, {padding: {top: 80, bottom: 80, left: 60, right: 60}});
+  else
+    map.fitBounds(bbox, {offset: [-100,0], padding: padding});
+}

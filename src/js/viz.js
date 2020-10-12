@@ -1,4 +1,4 @@
-var map, scroller, main, scrolly, figure, article, step, geoDataArray, viewportHeight;
+var map, scroller, main, scrolly, figure, article, step, geoDataArray, viewportWidth, viewportHeight;
 var currentIndex = 1;
 // var layerTypes = {
 //   'fill': ['fill-opacity'],
@@ -16,6 +16,7 @@ $( document ).ready(function() {
   var dataUrls = ['route1.geojson', 'route2.geojson', 'route3.geojson'];
   geoDataArray = new Array(dataUrls.length);
   mapboxgl.accessToken = 'pk.eyJ1IjoiaHVtZGF0YSIsImEiOiJja2FvMW1wbDIwMzE2MnFwMW9teHQxOXhpIn0.Uri8IURftz3Jv5It51ISAA';
+  viewportWidth = window.innerWidth;
   viewportHeight = window.innerHeight;
   
   function getData() {
@@ -94,13 +95,15 @@ $( document ).ready(function() {
 
 
   function initMap() {
-    console.log('Loading map...')
+    console.log('Loading map...');
+
+    var zoomLevel = 4.7;
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/draft',
+      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41',
       center: [47, 20],
       minZoom: 1,
-      zoom: 4.7,
+      zoom: zoomLevel,
       attributionControl: false
     });
 
@@ -113,9 +116,13 @@ $( document ).ready(function() {
       getData();
       initJourney();
       initPins();
-      //initSections();
       initSlideshow();
     });
+
+    // if (viewportWidth<=1280) {
+    //   var staticURL = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/47,20,'+zoomLevel+'/'+viewportWidth+'x'+viewportHeight+'?access_token='+mapboxgl.accessToken;
+    //   $('#static-map').css('background-image', 'url('+staticURL+')');
+    // }
   }
 
 
