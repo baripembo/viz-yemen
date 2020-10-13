@@ -26,10 +26,10 @@ const config = {
       id: 'step2',
       distance: '275.5',
       location: {
-        center: [ 43.5815, 13.9194],
-        zoom: 9,
+        center: [ 43.6011, 13.7187],
+        zoom: 9.3,
         pitch: 60,
-        bearing: 325
+        bearing: 320
       },
       onChapterEnter: [
         {

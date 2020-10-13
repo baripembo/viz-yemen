@@ -17,6 +17,11 @@
 
   <body>
 
+    <div class='loader'>
+      <div class="sp sp-circle"></div>
+      Loading map...
+    </div>
+
     <div class='ticker'>
       <p>0 steps walked. 0 km. 0 days.</p>
     </div>
@@ -53,7 +58,6 @@
       <section id="scrolly">
         <figure>
           <div id='map'></div>
-          <div id="static-map"></div>
         </figure>
 
         <article>
@@ -74,7 +78,7 @@
           </div>
           <div class="step" data-step="3">
             <div>
-              <h3>Taizz City [stay: one week]</h3>
+              <h3>Ta'izz City [stay: one week]</h3>
               <p>Ali and Fariha had never been this far away from home. They were exhausted and did not know where to go. They lived on food donated by residents in the area. While in Taizz City, Ali learned from former neighbours that his house in Al Hudaydah had been looted and all the family’s belongings stolen. He thought about how he had lost everything except his family in less than two weeks.</p>
               <p>A few days later, people advised Ali to take his family to a displacement site in a school in Dar Sad in Aden Governorate, where they could get help from aid agencies. Other displaced families, who had managed to pool enough money to pay a bus driver to take them to Aden, agreed to let the family travel with them on the 130 kilometer long ride.</p>
             </div>
@@ -90,6 +94,15 @@
       </section>
 
       <section id="outro">
+        <div class='video-container'>
+          <video id='icrcVideo' controls muted='muted'>
+            <source src='assets/icrc-video.mp4' type='video/mp4'>
+            Your browser does not support the video tag.
+          </video>
+          <p class='small'>Credit: ICRC</p>
+        </div>
+
+
         <h3>Displacement</h3>
 
         <p>Since the conflict began in March 2015, about 4.3 million people have been displaced. It is estimated that 3.6 million people – more than one in every ten Yemenis – remain displaced today. They are living with host families or in informal sites, such as abandoned buildings, empty schools, camps or out in the open.</p>
@@ -154,7 +167,7 @@
 
         <p>The family’s life became more challenging  once COVID-19 reached Yemen in March 2020. Guarding against infection in the close quarters of the camp is almost impossible. Even finding soap and water to wash their hands can be difficult.</p>
 
-        <p>Restrictions on movement have meant far fewer visits by aid agencies and the mobile health clinic run by an international NGO has stopped operating. The severe humanitarian funding shortfall has resulted in a drop in food and cash assistance. Testing capacity for COVID-19 is in short supply throughout the country.  Aid agencies have for months been operating on the assumption that there is full-blown community transmission of COVID-19 in Yemen. Based on existing models, even with mitigation measures, an estimated 16.7 million people - 55 per cent of the population - may be infected with COVID-19 in Yemen. More than 42,000 people may die and up to 292,000 patients are likely to require hospitalization.</p>
+        <p>Restrictions on movement have meant far fewer visits by aid agencies and the mobile health clinic run by an international NGO has stopped operating. The severe humanitarian funding shortfall has resulted in a drop in food and cash assistance. Testing capacity for COVID-19 is in short supply throughout the country.  Aid agencies have for months been operating on the assumption that there is full-blown community transmission of COVID-19 in Yemen. Based on existing models, even with mitigation measures, an estimated 16.7 million people - 55 percent of the population - may be infected with COVID-19 in Yemen. More than 42,000 people may die and up to 292,000 patients are likely to require hospitalization.</p>
 
         <h4>Confirmed COVID-19 cases and deaths in Yemen</h4>
         <div><img class='with-title' src='assets/covid-cases.png' /></div>

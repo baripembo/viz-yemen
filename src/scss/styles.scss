@@ -1,5 +1,6 @@
 @import '_fonts';
 @import '_grid';
+@import '_loader';
 
 * {
 	box-sizing: border-box;
@@ -15,9 +16,10 @@ html, body {
 }
 
 body {
+	background-color: #000;
 	color: #505050;
  	display: flex;
-  flex-direction: column;
+  	flex-direction: column;
 	font-family: 'Source Sans Pro', sans-serif;
 	margin: 0;
 	padding: 0;
@@ -85,15 +87,18 @@ p {
   padding: 9px 26px;
 }
 
-.small {
+p.small {
 	color: #888;
 	font-size: 11px;
 	line-height: 13px;
+	margin: 5px 0;
 }
 
 main {
 	flex: 1;
+	opacity: 0;
 	position: relative;
+	transition: opacity 0.3s ease;
 }
 
 footer {
@@ -105,12 +110,12 @@ footer {
 		display: flex;
 		flex-flow: row;
 		margin: 0 auto;
+		padding-top: 20px;
 		width: 800px;
 		.left {
 			width: 60%;
 		}
 		.right {
-			margin-top: 28px;
 			text-align: right;
 			width: 40%;
 		}
@@ -285,8 +290,13 @@ figure p {
 	}
 }
 
-.map-overlay {
-
+.video-container {
+	margin-bottom: 60px;
+	video {
+		height: auto;
+		margin: 20px 0 0;
+		width: 100%;
+	}
 }
 
 #outro,
@@ -338,7 +348,7 @@ figure p {
 }
 
 .pin-container {
-	margin: 0 auto;
+	margin: 0 auto 60px;
 	width: 700px !important;
 	.pin-item {
 		margin: 0;
