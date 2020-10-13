@@ -27,10 +27,10 @@ const config = {
       id: 'step2',
       distance: '275.5',
       location: {
-        center: [ 43.5815, 13.9194],
-        zoom: 9,
+        center: [ 43.6011, 13.7187],
+        zoom: 9.3,
         pitch: 60,
-        bearing: 325
+        bearing: 320
       },
       onChapterEnter: [
         {
@@ -271,18 +271,55 @@ $( document ).ready(function() {
     //map.addControl(new mapboxgl.AttributionControl(), 'bottom-right');
     map.scrollZoom.disable();
 
+    //add icon images
+    var iconArray = ['icon_marker'];
+    iconArray.forEach(function(imageName) {
+      map.loadImage('assets/icons/'+imageName+'.png', function(error, image) {
+        map.addImage(imageName, image);
+      });
+    });
+
     map.on('load', function() {
       console.log('Map loaded')
+      $('.loader').remove();
+      $('main').css('opacity', 1);
       getData();
+      locationData();
       initJourney();
       initPins();
       initSlideshow();
     });
+  }
 
-    // if (viewportWidth<=1280) {
-    //   var staticURL = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/47,20,'+zoomLevel+'/'+viewportWidth+'x'+viewportHeight+'?access_token='+mapboxgl.accessToken;
-    //   $('#static-map').css('background-image', 'url('+staticURL+')');
-    // }
+  function locationData() {
+    map.addSource('locationSource', {
+      type: 'geojson',
+      data: DATA_URL+'geodata_locations.geojson'
+    });
+
+    map.addLayer({
+      'id': 'locationPoints',
+      'type': 'symbol',
+      'source': 'locationSource',
+      'layout': {
+        'icon-image': '{icon}',
+        'icon-size': { 'type': 'identity', 'property': 'iconSize' },
+        'text-field': '{name}',
+        'text-font': ['PT Sans Bold', 'Arial Unicode MS Bold'],
+        'text-size': 16,
+        'text-max-width': { 'type': 'identity', 'property': 'textMaxWidth' },
+        'text-justify': 'left',
+        'text-offset': { 'type': 'identity', 'property': 'textOffset' },
+        'text-anchor': { 'type': 'identity', 'property': 'textAnchor' },
+        'icon-allow-overlap': false,
+        'text-allow-overlap': false
+      },
+      paint: {
+        'text-color': '#FFF',
+        'text-halo-color': '#000',
+        'text-halo-width': 1
+      }
+    });
   }
 
 
