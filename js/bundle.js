@@ -282,6 +282,7 @@ $( document ).ready(function() {
     map.on('load', function() {
       console.log('Map loaded')
       $('.loader').remove();
+      $('body').css('backgroundColor', '#FFF');
       $('main').css('opacity', 1);
       getData();
       locationData();
