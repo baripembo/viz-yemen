@@ -98,6 +98,9 @@ function handleResize() {
   var stepH = Math.floor(window.innerHeight);
   step.style("height", stepH + "px");
 
+  //double height of last step
+  $(".step[data-step='4']").css("height", stepH*2 + "px");
+
   var figureHeight = window.innerHeight;
   var figureMarginTop = (window.innerHeight - figureHeight) / 2;
 
@@ -105,7 +108,6 @@ function handleResize() {
     .style("height", figureHeight + "px")
     .style("top", figureMarginTop + "px");
 
-  // 3. tell scrollama to update new element dimensions
   scroller.resize();
 }
 

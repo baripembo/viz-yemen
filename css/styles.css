@@ -1536,6 +1536,8 @@ figure p {
     width: 100%; }
     #intro .inner h2 {
       margin: 20px 0 40px; }
+  #intro .social-icons {
+    display: none; }
   .header-body p {
     width: 100%; }
   .logos .grid-container > div {
@@ -1543,6 +1545,8 @@ figure p {
     text-align: center; }
   .logos img {
     margin: 10px; }
+  .step {
+    opacity: 1; }
   #outro,
   #conclusion {
     margin: 60px 0;
@@ -1566,7 +1570,7 @@ figure p {
       width: 100%; }
     footer .inner .right {
       text-align: left; }
-  footer .footer-logos a img {
-    margin-right: 0; }
-  footer .footer-logos a:last-child {
-    margin-left: auto; } }
+    footer .inner .footer-logos a img {
+      margin-right: 0; }
+    footer .inner .footer-logos a:last-child {
+      margin-left: auto; } }
