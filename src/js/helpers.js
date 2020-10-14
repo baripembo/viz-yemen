@@ -4,6 +4,9 @@ function handleResize() {
   var stepH = Math.floor(window.innerHeight);
   step.style("height", stepH + "px");
 
+  //double height of last step
+  $(".step[data-step='4']").css("height", stepH*1.5 + "px");
+
   var figureHeight = window.innerHeight;
   var figureMarginTop = (window.innerHeight - figureHeight) / 2;
 
@@ -11,7 +14,6 @@ function handleResize() {
     .style("height", figureHeight + "px")
     .style("top", figureMarginTop + "px");
 
-  // 3. tell scrollama to update new element dimensions
   scroller.resize();
 }
 
@@ -37,10 +39,8 @@ function setupStickyfill() {
 //   }
 // }
 
-function setMapBounds(points, padding) {
+function setMapBounds(points, paddingBottom, bearing, pitch) {
   let bbox = turf.extent(points);
-  if (isMobile)
-    map.fitBounds(bbox, {padding: {top: 80, bottom: 80, left: 60, right: 60}});
-  else
-    map.fitBounds(bbox, {offset: [-100,0], padding: padding});
+  var padding = (viewportWidth<768) ? {top: 40, bottom: 40, left: 60, right: 60} : {top: 0, bottom: paddingBottom, left: 550, right: 150};
+  map.fitBounds(bbox, {padding: padding, bearing: bearing, pitch: pitch});
 }

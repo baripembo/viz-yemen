@@ -77,6 +77,10 @@ p {
 	margin: 28px 0;
 }
 
+.center-align {
+	text-align: center;
+}
+
 .button {
 	background-color: #357BC6;
   border: 1px solid #707070;
@@ -85,6 +89,10 @@ p {
   font-size: 25px;
   font-weight: 600;
   padding: 9px 26px;
+  &:hover {
+		background-color: #006ABF;
+  	color: #FFF;
+  }
 }
 
 p.small {
@@ -476,11 +484,14 @@ figure p {
 
 @media only screen and (max-width: 767px) {
 	h1 {
-		font-size: 45px;
-		line-height: 45px;
+		font-size: 42px;
+		line-height: 42px;
 	}
 	h3 {
-		font-size: 24px;
+		font-size: 19px;
+	}
+	main {
+		//overflow-x: hidden;
 	}
 	article {
 		margin-left: auto;
@@ -499,6 +510,9 @@ figure p {
 				margin: 20px 0 40px; 
 			}
 		}
+		.social-icons {
+			display: none;
+		}
 	}
 	.header-body {
 		p {
@@ -513,6 +527,9 @@ figure p {
 		img {
 			margin: 10px;
 		}
+	}
+	.step {
+		opacity: 1;
 	}
 	#outro, 
 	#conclusion {
@@ -540,8 +557,26 @@ figure p {
 	}
 	footer {
 		.inner {
+			flex-flow: column-reverse;
     	padding: 0 20px;
 			width: 100%;
+			.left,
+			.right {
+				width: 100%;
+			}
+			.right {
+				text-align: left;
+			}
+			.footer-logos {
+				a {
+					img {
+						margin-right: 0;
+					}
+					&:last-child {
+						margin-left: auto;
+					}
+				}
+			}
 		}
 	}
 }

@@ -66,7 +66,7 @@ $( document ).ready(function() {
         'line-color': '#FFF',
         'line-width': 3
       }
-    })
+    }, 'locationPoints')
   }
 
 
@@ -100,7 +100,7 @@ $( document ).ready(function() {
     var zoomLevel = 4.7;
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41',
+      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/draft',
       center: [47, 20],
       minZoom: 1,
       zoom: zoomLevel,
@@ -122,9 +122,11 @@ $( document ).ready(function() {
     map.on('load', function() {
       console.log('Map loaded')
       $('.loader').remove();
+      $('body').css('backgroundColor', '#FFF');
       $('main').css('opacity', 1);
-      getData();
       locationData();
+      getData();
+      initIntro();
       initJourney();
       initPins();
       initSlideshow();
@@ -145,20 +147,52 @@ $( document ).ready(function() {
         'icon-image': '{icon}',
         'icon-size': { 'type': 'identity', 'property': 'iconSize' },
         'text-field': '{name}',
-        'text-font': ['PT Sans Bold', 'Arial Unicode MS Bold'],
+        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Bold'],
         'text-size': 16,
         'text-max-width': { 'type': 'identity', 'property': 'textMaxWidth' },
         'text-justify': 'left',
         'text-offset': { 'type': 'identity', 'property': 'textOffset' },
         'text-anchor': { 'type': 'identity', 'property': 'textAnchor' },
         'icon-allow-overlap': false,
-        'text-allow-overlap': false
+        'text-allow-overlap': false,
+        'visibility': 'none'
       },
       paint: {
         'text-color': '#FFF',
         'text-halo-color': '#000',
         'text-halo-width': 1
       }
+    });
+  }
+
+
+  function initIntro() {
+    //img switch for food security graphic
+    var controller = new ScrollMagic.Controller();
+    var pinScene = new ScrollMagic.Scene({
+      triggerElement: "#introInner",
+      triggerHook: 0.2
+    })
+    .addTo(controller)
+    .on('enter', function(e) {
+      var location = {
+        center: [48.21908, 15.53492],
+        zoom: 6.13,
+        pitch: 0,
+        bearing: 0
+      };
+      map.flyTo(location);
+      $('.arrow-down').hide();
+    })
+    .on('leave', function(e) {
+      var location = {
+        center: [47, 20],
+        zoom: 4.7,
+        pitch: 0,
+        bearing: 0
+      };
+      map.flyTo(location);
+      $('.arrow-down').show();
     });
   }
 
@@ -192,9 +226,6 @@ $( document ).ready(function() {
       var item = $(this).find('.pin-item')[0];
       var pos = Math.round(viewportHeight/2 - $(item).height()/2);
       $(item).css('top', pos);
-      //$(this).find('.annotation').each(function() {
-        //$(this).find('> div').css('bottom', $(item).height()/2);
-      //});
     });
 
     //img switch for food security graphic
@@ -209,38 +240,38 @@ $( document ).ready(function() {
 
 
   function handleStepEnter(response) {
-    //response = { element, direction, index }
     currentIndex = response.index;
     var chapter = config.chapters[currentIndex];
     var location = chapter.location;
 
     $('.ticker').addClass('active');
-    $('.arrow-down').hide();
+    map.setLayoutProperty('locationPoints', 'visibility', 'visible');
 
     // set active step
     step.classed('is-active', function(d, i) {
       return i === response.index;
     });
 
-    if (location!=undefined) {
-      map.flyTo(location);
-    }
-
     // if (chapter.onChapterEnter!=undefined && chapter.onChapterEnter.length > 0) {
     //   chapter.onChapterEnter.forEach(setLayerOpacity);
     // }
 
     if (geoDataArray[response.index]!==undefined) {
-      //var padding = 100;
-      //setMapBounds(geoDataArray[response.index], padding);
+      var padding = 0;
+      setMapBounds(geoDataArray[response.index], chapter.paddingBottom, chapter.location.bearing, chapter.location.pitch);
+
       if (animationDone) {
         animateLine();
         animationDone = false;
       }
     }
+    else {
+      //zoom into adan
+      map.flyTo(location);
+    }
 
-    if (response.index<config.chapters.length-1)
-      updateTicker(chapter.distance);
+    if (response.index<config.chapters.length)
+      updateTicker(chapter.distance, chapter.duration);
   }
 
   function handleStepExit(response) {
@@ -259,12 +290,12 @@ $( document ).ready(function() {
     }
   }
 
-  function updateTicker(value) {
+  function updateTicker(distance, duration) {
     $('.ticker p').animate({
       opacity: 0,
       marginTop: '50px',
     }, 400, function() {
-      $(this).text(value + ' km. XXX days.');
+      $(this).text(distance + ' km. ' + duration + '.');
       $(this).css('marginTop', '-50px').animate({
         opacity: 1,
         marginTop: '0'
