@@ -260,7 +260,7 @@ $( document ).ready(function() {
     var zoomLevel = 4.7;
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41',
+      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/draft',
       center: [47, 20],
       minZoom: 1,
       zoom: zoomLevel,
@@ -306,7 +306,7 @@ $( document ).ready(function() {
         'icon-image': '{icon}',
         'icon-size': { 'type': 'identity', 'property': 'iconSize' },
         'text-field': '{name}',
-        'text-font': ['PT Sans Bold', 'Arial Unicode MS Bold'],
+        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Bold'],
         'text-size': 16,
         'text-max-width': { 'type': 'identity', 'property': 'textMaxWidth' },
         'text-justify': 'left',

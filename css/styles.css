@@ -1187,6 +1187,9 @@ p {
   line-height: 26px;
   margin: 28px 0; }
 
+.center-align {
+  text-align: center; }
+
 .button {
   background-color: #357BC6;
   border: 1px solid #707070;
@@ -1195,6 +1198,9 @@ p {
   font-size: 25px;
   font-weight: 600;
   padding: 9px 26px; }
+  .button:hover {
+    background-color: #006ABF;
+    color: #FFF; }
 
 p.small {
   color: #888;
@@ -1514,10 +1520,10 @@ figure p {
 
 @media only screen and (max-width: 767px) {
   h1 {
-    font-size: 45px;
-    line-height: 45px; }
+    font-size: 42px;
+    line-height: 42px; }
   h3 {
-    font-size: 24px; }
+    font-size: 19px; }
   article {
     margin-left: auto;
     width: 88%; }
@@ -1552,5 +1558,13 @@ figure p {
     left: 20px;
     width: 90%; }
   footer .inner {
+    flex-flow: column-reverse;
     padding: 0 20px;
-    width: 100%; } }
+    width: 100%; }
+    footer .inner .left,
+    footer .inner .right {
+      width: 100%; }
+    footer .inner .right {
+      text-align: left; }
+  footer .footer-logos a:last-child img {
+    margin-right: 0; } }
