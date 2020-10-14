@@ -1566,5 +1566,7 @@ figure p {
       width: 100%; }
     footer .inner .right {
       text-align: left; }
-  footer .footer-logos a:last-child img {
-    margin-right: 0; } }
+  footer .footer-logos a img {
+    margin-right: 0; }
+  footer .footer-logos a:last-child {
+    margin-left: auto; } }
