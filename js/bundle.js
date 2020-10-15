@@ -268,7 +268,7 @@ $( document ).ready(function() {
     var zoomLevel = 4.7;
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/draft',
+      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/',
       center: [47, 20],
       minZoom: 1,
       zoom: zoomLevel,
@@ -335,7 +335,7 @@ $( document ).ready(function() {
 
 
   function initIntro() {
-    //img switch for food security graphic
+    //intro animation
     var controller = new ScrollMagic.Controller();
     var pinScene = new ScrollMagic.Scene({
       triggerElement: "#introInner",
@@ -361,6 +361,26 @@ $( document ).ready(function() {
       };
       map.flyTo(location);
       $('.arrow-down').show();
+    });
+
+    //auto play/pause video
+    var vid = document.getElementById('icrcVideo');
+    var videoScene = new ScrollMagic.Scene({
+      triggerElement: "#icrcVideo",
+      triggerHook: 'onEnter', 
+      duration: '100%'
+    })
+    .addTo(controller)
+    .on('end', function(e) {
+      console.log('end event')
+    })
+    .on('enter', function(e) {
+      console.log('enter event')
+      vid.play();
+    })
+    .on('leave', function(e) {
+      console.log('leave event')
+      vid.pause();
     });
   }
 
