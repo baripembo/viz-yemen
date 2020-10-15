@@ -371,15 +371,10 @@ $( document ).ready(function() {
       duration: '100%'
     })
     .addTo(controller)
-    .on('end', function(e) {
-      console.log('end event')
-    })
     .on('enter', function(e) {
-      console.log('enter event')
       vid.play();
     })
     .on('leave', function(e) {
-      console.log('leave event')
       vid.pause();
     });
   }
