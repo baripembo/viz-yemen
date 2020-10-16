@@ -78,7 +78,7 @@ const config = {
       duration: '3 years',
       location: {
         center: [ 45.0208, 12.7864],
-        zoom: 14.5,
+        zoom: 13.34,
         pitch: 30,
         bearing: 40
       },

@@ -100,7 +100,7 @@ $( document ).ready(function() {
     var zoomLevel = 4.7;
     map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/draft',
+      style: 'mapbox://styles/humdata/ckfx2jgjd10qx1bnzkla9px41/',
       center: [47, 20],
       minZoom: 1,
       zoom: zoomLevel,
@@ -167,7 +167,7 @@ $( document ).ready(function() {
 
 
   function initIntro() {
-    //img switch for food security graphic
+    //intro animation
     var controller = new ScrollMagic.Controller();
     var pinScene = new ScrollMagic.Scene({
       triggerElement: "#introInner",
@@ -193,6 +193,50 @@ $( document ).ready(function() {
       };
       map.flyTo(location);
       $('.arrow-down').show();
+    });
+
+    //auto play/pause video
+    var vid = document.getElementById('icrcVideo');
+    var videoScene = new ScrollMagic.Scene({
+      triggerElement: "#icrcVideo",
+      triggerHook: 'onEnter', 
+      duration: '100%'
+    })
+    .addTo(controller)
+    .on('enter', function(e) {
+      vid.play();
+    })
+    .on('leave', function(e) {
+      vid.pause();
+    });
+
+
+    var total = 50;
+    var numAffected = Math.round(total * (2/3));
+    var timelineTween = new TimelineMax();
+
+    for (var i=0; i<total; i++) {
+      var person = (i%2==0) ? 'humanitarianicons-Person-2' : 'humanitarianicons-Person-1';
+      $('.icon-test').append('<i class="'+person+'" id="icon'+ i +'"></i>');
+      if (i<=numAffected) {
+        var icon = '#icon'+i;
+        timelineTween.to(icon, 0.2, {color: '#E67800', opacity: 1, onStartParams: [icon], onStart: function(icon) {
+          //$(icon).attr('class', 'humanitarianicons-Affected-population');
+        }}, '-=.1');
+      }
+    }
+
+    var inNeedScene = new ScrollMagic.Scene({
+      triggerElement: '#pinIcons',
+      triggerHook: 'onEnter'
+    })
+    //.addIndicators()
+    .setTween(timelineTween)
+    .addTo(controller)
+    .on('start', function() {
+      timelineTween.invalidate().restart();
+      $('.icon-test i').css('color', '#888');
+      $('.icon-test i').css('opacity', 0.5);
     });
   }
 
