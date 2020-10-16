@@ -79,7 +79,7 @@ const config = {
       duration: '3 years',
       location: {
         center: [ 45.0208, 12.7864],
-        zoom: 14.5,
+        zoom: 13.34,
         pitch: 30,
         bearing: 40
       },
@@ -376,6 +376,35 @@ $( document ).ready(function() {
     })
     .on('leave', function(e) {
       vid.pause();
+    });
+
+
+    var total = 50;
+    var numAffected = Math.round(total * (2/3));
+    var timelineTween = new TimelineMax();
+
+    for (var i=0; i<total; i++) {
+      var person = (i%2==0) ? 'humanitarianicons-Person-2' : 'humanitarianicons-Person-1';
+      $('.icon-test').append('<i class="'+person+'" id="icon'+ i +'"></i>');
+      if (i<=numAffected) {
+        var icon = '#icon'+i;
+        timelineTween.to(icon, 0.2, {color: '#E67800', opacity: 1, onStartParams: [icon], onStart: function(icon) {
+          //$(icon).attr('class', 'humanitarianicons-Affected-population');
+        }}, '-=.1');
+      }
+    }
+
+    var inNeedScene = new ScrollMagic.Scene({
+      triggerElement: '#pinIcons',
+      triggerHook: 'onEnter'
+    })
+    //.addIndicators()
+    .setTween(timelineTween)
+    .addTo(controller)
+    .on('start', function() {
+      timelineTween.invalidate().restart();
+      $('.icon-test i').css('color', '#888');
+      $('.icon-test i').css('opacity', 0.5);
     });
   }
 
