@@ -1405,6 +1405,7 @@ figure p {
     color: #888;
     display: inline-block;
     font-size: 64px;
+    padding: 6px;
     text-align: center;
     width: 64px; }
 
