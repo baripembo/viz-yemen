@@ -565,6 +565,9 @@ figure p {
 	.pin-container {
 		width: 100% !important;
 	}
+	.flourish-chart {
+		z-index: -1;
+	}
 	.annotation {
 		z-index: 3;
 		div {
@@ -573,8 +576,8 @@ figure p {
 	}
 	.icon-test {
 		i {
-			font-size: 37px;
-			width: 37px;
+			font-size: 33px;
+			width: 33px;
 		}
 	}
 	#slideshow {
