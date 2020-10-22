@@ -1576,13 +1576,15 @@ figure p {
       width: 100%; }
   .pin-container {
     width: 100% !important; }
+  .flourish-chart {
+    z-index: -1; }
   .annotation {
     z-index: 3; }
     .annotation div {
       width: 70%; }
   .icon-test i {
-    font-size: 37px;
-    width: 37px; }
+    font-size: 33px;
+    width: 33px; }
   #slideshow .caption p {
     left: 20px;
     width: 90%; }
