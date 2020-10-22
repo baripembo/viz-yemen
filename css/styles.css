@@ -1373,6 +1373,7 @@ figure p {
 .video-container {
   margin-bottom: 60px; }
   .video-container video {
+    background-color: #000;
     height: auto;
     margin: 20px 0 0;
     width: 100%; }
@@ -1442,8 +1443,7 @@ figure p {
 .annotation {
   height: 150vh;
   pointer-events: none;
-  position: relative;
-  z-index: 2; }
+  position: relative; }
   .annotation > div {
     background-color: #FFF;
     border: 1px solid #CCC;
@@ -1565,7 +1565,8 @@ figure p {
   .logos img {
     margin: 10px; }
   .step {
-    opacity: 1; }
+    opacity: 1;
+    z-index: 1; }
   #outro,
   #conclusion {
     margin: 60px 0;
@@ -1575,8 +1576,10 @@ figure p {
       width: 100%; }
   .pin-container {
     width: 100% !important; }
-  .annotation div {
-    width: 70%; }
+  .annotation {
+    z-index: 3; }
+    .annotation div {
+      width: 70%; }
   .icon-test i {
     font-size: 37px;
     width: 37px; }
@@ -1592,7 +1595,6 @@ figure p {
       width: 100%; }
     footer .inner .right {
       text-align: left; }
-    footer .inner .footer-logos a img {
-      margin-right: 0; }
-    footer .inner .footer-logos a:last-child {
-      margin-left: auto; } }
+    footer .inner .footer-logos a img:first-child {
+      height: auto;
+      width: 125px; } }
