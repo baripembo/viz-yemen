@@ -58,7 +58,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Aden",
+        "name": "Dar Sad",
         "icon": "icon_marker",
         "iconSize": 0.3,
         "textAnchor": "top",
@@ -68,8 +68,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          45.02091,
-          12.78340
+          44.9720,
+          12.8842
         ]
       }
     }
