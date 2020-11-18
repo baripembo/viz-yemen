@@ -25,6 +25,15 @@ $( document ).ready(function() {
         parseData(JSON.parse(responseText), index);
       })
     })
+
+    //preload slideshow images
+    preload([
+      'assets/slideshow/aden-water.jpg',
+      'assets/slideshow/aden-woman.jpg',
+      'assets/slideshow/aden-idpsite.jpg',
+      'assets/slideshow/aden-craiter.jpg',
+      'assets/slideshow/aden-aerial.jpg'
+    ]);
   }
 
   function loadData(dataPath, done) {
@@ -217,7 +226,7 @@ $( document ).ready(function() {
 
     for (var i=0; i<total; i++) {
       var person = (i%2==0) ? 'humanitarianicons-Person-2' : 'humanitarianicons-Person-1';
-      $('.icon-test').append('<i class="'+person+'" id="icon'+ i +'"></i>');
+      $('.icon-animation').append('<i class="'+person+'" id="icon'+ i +'"></i>');
       if (i<=numAffected) {
         var icon = '#icon'+i;
         timelineTween.to(icon, 0.2, {color: '#E67800', opacity: 1, onStartParams: [icon], onStart: function(icon) {
@@ -235,8 +244,8 @@ $( document ).ready(function() {
     .addTo(controller)
     .on('start', function() {
       timelineTween.invalidate().restart();
-      $('.icon-test i').css('color', '#888');
-      $('.icon-test i').css('opacity', 0.5);
+      $('.icon-animation i').css('color', '#888');
+      $('.icon-animation i').css('opacity', 0.5);
     });
   }
 

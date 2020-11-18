@@ -23,21 +23,12 @@ function setupStickyfill() {
   });
 }
 
-// function getLayerPaintType(layer) {
-//   if (map.getLayer(layer)!=undefined) {
-//     var layerType = map.getLayer(layer).type;
-//     return layerTypes[layerType];
-//   }
-// }
+function preload(arrayOfImages) {
+  $(arrayOfImages).each(function(){
+    (new Image()).src = this;
+  });
+}
 
-// function setLayerOpacity(layer) {
-//   var paintProps = getLayerPaintType(layer.layer);
-//   if (paintProps!=undefined) {
-//     paintProps.forEach(function(prop) {
-//       map.setPaintProperty(layer.layer, prop, layer.opacity);
-//     });
-//   }
-// }
 
 function setMapBounds(points, paddingBottom, bearing, pitch) {
   let bbox = turf.extent(points);

@@ -5,7 +5,7 @@ const config = {
       distance: '63.5',
       duration: '4 days',
       location: {
-        center: [42.97983, 14.73442],
+        //center: [42.97983, 14.73442],
         zoom: 9.7,
         pitch: 40,
         bearing: 0
@@ -29,10 +29,10 @@ const config = {
       distance: '275.5',
       duration: '4 days',
       location: {
-        center: [ 43.6011, 13.7187],
+        //center: [ 43.6011, 13.7187],
         zoom: 9.3,
         pitch: 60,
-        bearing: 320
+        bearing: 340
       },
       paddingBottom: 150,
       onChapterEnter: [
@@ -53,12 +53,12 @@ const config = {
       distance: '462',
       duration: '7 days',
       location: {
-        center: [ 44.5155, 13.0651],
-        zoom: 8.6,
+        //center: [ 45.1184, 13.0328],
+        zoom: 8.3,
         pitch: 40,
         bearing: 314
       },
-      paddingBottom: 350,
+      paddingBottom: 330,
       onChapterEnter: [
         {
           layer: 'route-3',
@@ -77,24 +77,12 @@ const config = {
       distance: '462',
       duration: '3 years',
       location: {
-        center: [ 45.0208, 12.7864],
-        zoom: 13.34,
-        pitch: 30,
-        bearing: 40
+        center: [ 44.9852, 12.8951],
+        zoom: 16,
+        pitch: 0,
+        bearing: 330
       },
-      paddingBottom: 350,
-      // onChapterEnter: [
-      //   {
-      //     layer: 'route-4',
-      //     opacity: 1
-      //   }
-      // ],
-      // onChapterExit: [
-      //   {
-      //     layer: 'route-4',
-      //     opacity: 0
-      //   }
-      // ]
+      paddingBottom: 350
     }
   ]
 };
