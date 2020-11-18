@@ -6,7 +6,7 @@ const config = {
       distance: '63.5',
       duration: '4 days',
       location: {
-        center: [42.97983, 14.73442],
+        //center: [42.97983, 14.73442],
         zoom: 9.7,
         pitch: 40,
         bearing: 0
@@ -30,10 +30,10 @@ const config = {
       distance: '275.5',
       duration: '4 days',
       location: {
-        center: [ 43.6011, 13.7187],
+        //center: [ 43.6011, 13.7187],
         zoom: 9.3,
         pitch: 60,
-        bearing: 320
+        bearing: 340
       },
       paddingBottom: 150,
       onChapterEnter: [
@@ -54,12 +54,12 @@ const config = {
       distance: '462',
       duration: '7 days',
       location: {
-        center: [ 44.5155, 13.0651],
-        zoom: 8.6,
+        //center: [ 45.1184, 13.0328],
+        zoom: 8.3,
         pitch: 40,
         bearing: 314
       },
-      paddingBottom: 350,
+      paddingBottom: 330,
       onChapterEnter: [
         {
           layer: 'route-3',
@@ -78,24 +78,12 @@ const config = {
       distance: '462',
       duration: '3 years',
       location: {
-        center: [ 45.0208, 12.7864],
-        zoom: 13.34,
-        pitch: 30,
-        bearing: 40
+        center: [ 44.9852, 12.8951],
+        zoom: 16,
+        pitch: 0,
+        bearing: 330
       },
-      paddingBottom: 350,
-      // onChapterEnter: [
-      //   {
-      //     layer: 'route-4',
-      //     opacity: 1
-      //   }
-      // ],
-      // onChapterExit: [
-      //   {
-      //     layer: 'route-4',
-      //     opacity: 0
-      //   }
-      // ]
+      paddingBottom: 350
     }
   ]
 };
@@ -125,21 +113,12 @@ function setupStickyfill() {
   });
 }
 
-// function getLayerPaintType(layer) {
-//   if (map.getLayer(layer)!=undefined) {
-//     var layerType = map.getLayer(layer).type;
-//     return layerTypes[layerType];
-//   }
-// }
+function preload(arrayOfImages) {
+  $(arrayOfImages).each(function(){
+    (new Image()).src = this;
+  });
+}
 
-// function setLayerOpacity(layer) {
-//   var paintProps = getLayerPaintType(layer.layer);
-//   if (paintProps!=undefined) {
-//     paintProps.forEach(function(prop) {
-//       map.setPaintProperty(layer.layer, prop, layer.opacity);
-//     });
-//   }
-// }
 
 function setMapBounds(points, paddingBottom, bearing, pitch) {
   let bbox = turf.extent(points);
@@ -193,6 +172,15 @@ $( document ).ready(function() {
         parseData(JSON.parse(responseText), index);
       })
     })
+
+    //preload slideshow images
+    preload([
+      'assets/slideshow/aden-water.jpg',
+      'assets/slideshow/aden-woman.jpg',
+      'assets/slideshow/aden-idpsite.jpg',
+      'assets/slideshow/aden-craiter.jpg',
+      'assets/slideshow/aden-aerial.jpg'
+    ]);
   }
 
   function loadData(dataPath, done) {
@@ -385,7 +373,7 @@ $( document ).ready(function() {
 
     for (var i=0; i<total; i++) {
       var person = (i%2==0) ? 'humanitarianicons-Person-2' : 'humanitarianicons-Person-1';
-      $('.icon-test').append('<i class="'+person+'" id="icon'+ i +'"></i>');
+      $('.icon-animation').append('<i class="'+person+'" id="icon'+ i +'"></i>');
       if (i<=numAffected) {
         var icon = '#icon'+i;
         timelineTween.to(icon, 0.2, {color: '#E67800', opacity: 1, onStartParams: [icon], onStart: function(icon) {
@@ -403,8 +391,8 @@ $( document ).ready(function() {
     .addTo(controller)
     .on('start', function() {
       timelineTween.invalidate().restart();
-      $('.icon-test i').css('color', '#888');
-      $('.icon-test i').css('opacity', 0.5);
+      $('.icon-animation i').css('color', '#888');
+      $('.icon-animation i').css('opacity', 0.5);
     });
   }
 

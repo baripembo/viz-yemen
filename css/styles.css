@@ -1292,6 +1292,7 @@ footer {
     #intro .inner h2 {
       margin: 5px 0 50px; }
     #intro .inner .social-icons {
+      display: none;
       position: absolute;
       right: -120px;
       top: 26px; }
@@ -1399,10 +1400,10 @@ figure p {
 .flourish-credit {
   display: none; }
 
-.icon-test {
+.icon-animation {
   text-align: center;
   word-break: break-word; }
-  .icon-test i {
+  .icon-animation i {
     color: #888;
     display: inline-block;
     font-size: 64px;
@@ -1582,7 +1583,7 @@ figure p {
     z-index: 3; }
     .annotation div {
       width: 70%; }
-  .icon-test i {
+  .icon-animation i {
     font-size: 33px;
     width: 33px; }
   #slideshow .caption p {
