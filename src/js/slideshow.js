@@ -8,11 +8,11 @@ function initSlideshow() {
       })
       .on('enter', function(e) {
         var id = Number($(e.target.triggerElement()).data('caption'));
-        $('img[data-img="'+(id-1)+'"]').css('opacity', 0);
+        $('[data-img="'+(id-1)+'"]').css('opacity', 0);
       })
       .on('leave', function(e) {
         var id = Number($(e.target.triggerElement()).data('caption'));
-        $('img[data-img="'+(id-1)+'"]').css('opacity', 1);
+        $('[data-img="'+(id-1)+'"]').css('opacity', 1);
       })
       .addTo(controller);
   }

@@ -1,4 +1,4 @@
-var map, scroller, main, scrolly, figure, article, step, geoDataArray, viewportWidth, viewportHeight;
+var map, scroller, main, scrolly, figure, article, step, geoDataArray, viewportWidth, viewportHeight, isMobile;
 var currentIndex = 1;
 // var layerTypes = {
 //   'fill': ['fill-opacity'],
@@ -12,12 +12,12 @@ var currentIndex = 1;
 
 $( document ).ready(function() {
   const DATA_URL = 'data/';
-  var isMobile = $(window).width()<600? true : false;
   var dataUrls = ['route1.geojson', 'route2.geojson', 'route3.geojson'];
   geoDataArray = new Array(dataUrls.length);
   mapboxgl.accessToken = 'pk.eyJ1IjoiaHVtZGF0YSIsImEiOiJja2FvMW1wbDIwMzE2MnFwMW9teHQxOXhpIn0.Uri8IURftz3Jv5It51ISAA';
   viewportWidth = window.innerWidth;
   viewportHeight = window.innerHeight;
+  isMobile = (viewportWidth<767) ? true : false;
   
   function getData() {
     dataUrls.forEach(function (url, index) {
@@ -32,7 +32,7 @@ $( document ).ready(function() {
       'assets/slideshow/aden-woman.jpg',
       'assets/slideshow/aden-idpsite.jpg',
       'assets/slideshow/aden-craiter.jpg',
-      'assets/slideshow/aden-aerial.jpg'
+      'assets/slideshow/aden-girl.jpg'
     ]);
   }
 
@@ -157,7 +157,7 @@ $( document ).ready(function() {
         'icon-size': { 'type': 'identity', 'property': 'iconSize' },
         'text-field': '{name}',
         'text-font': ['DIN Pro Medium', 'Arial Unicode MS Bold'],
-        'text-size': 16,
+        'text-size': 18,
         'text-max-width': { 'type': 'identity', 'property': 'textMaxWidth' },
         'text-justify': 'left',
         'text-offset': { 'type': 'identity', 'property': 'textOffset' },
@@ -205,19 +205,19 @@ $( document ).ready(function() {
     });
 
     //auto play/pause video
-    var vid = document.getElementById('icrcVideo');
-    var videoScene = new ScrollMagic.Scene({
-      triggerElement: "#icrcVideo",
-      triggerHook: 'onEnter', 
-      duration: '100%'
-    })
-    .addTo(controller)
-    .on('enter', function(e) {
-      vid.play();
-    })
-    .on('leave', function(e) {
-      vid.pause();
-    });
+    // var vid = document.getElementById('icrcVideo');
+    // var videoScene = new ScrollMagic.Scene({
+    //   triggerElement: "#icrcVideo",
+    //   triggerHook: 'onEnter', 
+    //   duration: '100%'
+    // })
+    // .addTo(controller)
+    // .on('enter', function(e) {
+    //   vid.play();
+    // })
+    // .on('leave', function(e) {
+    //   vid.pause();
+    // });
 
 
     var total = 50;
@@ -280,17 +280,7 @@ $( document ).ready(function() {
       var pos = Math.round(viewportHeight/2 - $(item).height()/2);
       $(item).css('top', pos);
     });
-
-    //img switch for food security graphic
-    var controller = new ScrollMagic.Controller();
-    var pinScene = new ScrollMagic.Scene({
-      triggerElement: "#slide2",
-      triggerHook: 0.6
-    })
-    .setClassToggle("#pinFoodInsecurity", "showSlide2")
-    .addTo(controller);
   }
-
 
   function handleStepEnter(response) {
     currentIndex = response.index;
@@ -358,7 +348,7 @@ $( document ).ready(function() {
 
   function initTracking() {
     //initialize mixpanel
-    let MIXPANEL_TOKEN = '';
+    let MIXPANEL_TOKEN = window.location.hostname==='data.humdata.org'? '5cbf12bc9984628fb2c55a49daf32e74' : '99035923ee0a67880e6c05ab92b6cbc0';
     mixpanel.init(MIXPANEL_TOKEN);
     mixpanel.track('page view', {
       'page title': document.title,
@@ -367,5 +357,5 @@ $( document ).ready(function() {
   }
 
   initMap();
-  //initTracking();
+  initTracking();
 });
