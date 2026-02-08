@@ -139,6 +139,8 @@ $( document ).ready(function() {
       initJourney();
       initPins();
       initSlideshow();
+      initFundingChart();
+      initCommodityChart();
     });
   }
 
